@@ -2,7 +2,6 @@ package com.cydeo.step_definitions;
 
 import com.cydeo.pages.DashboardPage;
 import com.cydeo.pages.LoginPage;
-import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.And;
@@ -38,15 +37,7 @@ public class LoginStepDefs {
 
     }
 
-    @Then("user validates breadcrumb element is visible and equals {string}")
-    public void userValidatesBreadcrumbElementIsVisibleAndEquals(String expected_page_heading){
-        Assert.assertTrue(dashboardPage.breadcrumb.isDisplayed());
-
-        String actualBreadcrumbText = dashboardPage.breadcrumb.getText().toLowerCase();
-        Assert.assertTrue(actualBreadcrumbText.contains(expected_page_heading.toLowerCase()));
-    }
-
-    @Then("user validates page URL")
+    @And("user validates page URL")
     public void user_validates_page_url() {
         String expectedURL = "https://qa.translantik.com/";
         String actualURL = Driver.getDriver().getCurrentUrl();
@@ -54,11 +45,19 @@ public class LoginStepDefs {
         Assert.assertEquals(expectedURL, actualURL);
     }
 
-    @Then("user validates page title")
+    @And("user validates page title")
     public void user_validates_page_title() {
         String expectedPageTitle = "Dashboard Page";
         String actualPageTitle = Driver.getDriver().getTitle();
         Assert.assertTrue(expectedPageTitle.contains(actualPageTitle));
+    }
+
+    @And("user validates breadcrumb element is visible and equals {string}")
+    public void userValidatesBreadcrumbElementIsVisibleAndEquals(String expected_page_heading){
+        Assert.assertTrue(dashboardPage.breadcrumb.isDisplayed());
+
+        String actualBreadcrumbText = dashboardPage.breadcrumb.getText().toLowerCase();
+        Assert.assertTrue("Breadcrumb element/text is not visible on the page!", actualBreadcrumbText.contains(expected_page_heading.toLowerCase()));
     }
 
 
