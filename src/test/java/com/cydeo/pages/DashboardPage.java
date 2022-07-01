@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class TranslantikDashboardPage {
-    public TranslantikDashboardPage(){
+public class DashboardPage {
+    public DashboardPage(){
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
@@ -16,6 +16,15 @@ public class TranslantikDashboardPage {
     //@FindBy(xpath = "//a[.='Logout']")
     @FindBy(linkText = "Logout")
     public WebElement logOutLink;
+
+    @FindBy(xpath = "//div[@id='breadcrumb']")
+    public WebElement breadcrumb;
+
+    @FindBy(xpath = "//h1[@class='oro-subtitle']")
+    public WebElement pageHeading;
+
+
+
 
     public void logout(){
         fullName.click();

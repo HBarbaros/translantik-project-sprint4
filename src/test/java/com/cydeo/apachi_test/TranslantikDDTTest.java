@@ -1,7 +1,7 @@
 package com.cydeo.apachi_test;
 
-import com.cydeo.pages.TranslantikDashboardPage;
-import com.cydeo.pages.TranslantikLoginPage;
+import com.cydeo.pages.DashboardPage;
+import com.cydeo.pages.LoginPage;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -20,8 +20,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class TranslantikDDTTest {
-    TranslantikLoginPage loginPage = new TranslantikLoginPage();
-    TranslantikDashboardPage dashboardPage = new TranslantikDashboardPage();
+    LoginPage loginPage = new LoginPage();
+    DashboardPage dashboardPage = new DashboardPage();
 
     @Before
     public void setUp(){

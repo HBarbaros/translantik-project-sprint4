@@ -5,9 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class TranslantikLoginPage {
+public class LoginPage {
 
-    public TranslantikLoginPage() {
+    public LoginPage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
@@ -22,6 +22,8 @@ public class TranslantikLoginPage {
 
     @FindBy(id = "remember_me")
     public WebElement rememberMeBtn;
+
+
 
 
     public void login(String username, String password) {
