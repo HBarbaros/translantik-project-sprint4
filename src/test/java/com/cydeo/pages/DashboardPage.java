@@ -1,9 +1,13 @@
 package com.cydeo.pages;
 
 import com.cydeo.utilities.Driver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.ArrayList;
 
 public class DashboardPage {
     public DashboardPage(){
@@ -30,6 +34,8 @@ public class DashboardPage {
         fullName.click();
         logOutLink.click();
     }
+
+
 
 
 

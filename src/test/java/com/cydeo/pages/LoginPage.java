@@ -23,6 +23,9 @@ public class LoginPage {
     @FindBy(id = "remember_me")
     public WebElement rememberMeBtn;
 
+    @FindBy(xpath = "//div[@class='alert alert-error']//div")
+    public WebElement invalidUsernameOrPasswordError;
+
 
 
 
