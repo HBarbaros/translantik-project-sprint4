@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -116,18 +117,19 @@ public class LoginStepDefs {
     @And("user copies the URL, closes the browser, opens a new browser and then pastes the URL")
     public void userCopiesTheURLClosesTheBrowserOpensANewBrowserAndThenPastesTheURL() {
 
-        String actualURL = Driver.getDriver().getCurrentUrl();
-
-        Driver.getDriver().close();
-        Driver.getDriver().get(ConfigurationReader.getProperty(actualURL));
+//        String actualURL = Driver.getDriver().getCurrentUrl();
+//
+//        Driver.getDriver().close();
+//
+//        Driver.getDriver().get(ConfigurationReader.getProperty("translantik.url"));
+//        Driver.getDriver().get(actualURL);
 
     }
 
     @Then("user can't remain logged in on the dashboard page")
     public void userCanTRemainLoggedInOnTheDashboardPage() {
-//        String expectedPageTitle = "Dashboard Page";
+        String expectedPageTitle = "Dashboard Page";
         String actualPageTitle = Driver.getDriver().getTitle();
-        System.out.println("actualPageTitle = " + actualPageTitle);
-////        Assert.assertTrue(expectedPageTitle.contains(actualPageTitle));
+        Assert.assertTrue(expectedPageTitle.contains(actualPageTitle));
     }
 }

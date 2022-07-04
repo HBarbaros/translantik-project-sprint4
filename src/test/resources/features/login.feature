@@ -1,3 +1,4 @@
+@login
 Feature: Default
 
   @TRN-1524
@@ -62,22 +63,22 @@ Feature: Default
       | storemanager51  | UserUser123 |
       | salesmanager101 | UserUser123 |
 
+  @TRN-1533
+  Scenario Outline: US01-TC04 user remains logged in after passing a new tab while the previous was open
+    Given user is on Translatik login page
+    When user enters "<username>" and "<password>"
+    And user after logging into the app, copies the URL, opens a new TAB, closes the previous TAB and then pastes the URL
+    Then user remains logged in on the dashboard page
 
-    Scenario Outline: US01-TC04 user remains logged in after passing a new tab while the previous was open
-      Given user is on Translatik login page
-      When user enters "<username>" and "<password>"
-      And user after logging into the app, copies the URL, opens a new TAB, closes the previous TAB and then pastes the URL
-      Then user remains logged in on the dashboard page
+    Examples: Valid credentials are listed below
 
-      Examples: Valid credentials are listed below
-
-    | username        | password    |
-    | user10          | UserUser123 |
-#        | storemanager51  | UserUser123 |
-#        | salesmanager101 | UserUser123 |
+      | username        | password    |
+      | user10          | UserUser123 |
+      | storemanager51  | UserUser123 |
+      | salesmanager101 | UserUser123 |
 
 
-  @wip
+  @TRN-1534
   Scenario Outline: US01-TC05 user can't remain logged in after quitting browser without logout and passing a new browser
     Given user is on Translatik login page
     When user enters "<username>" and "<password>"
@@ -88,7 +89,7 @@ Feature: Default
 
       | username        | password    |
       | user10          | UserUser123 |
-#        | storemanager51  | UserUser123 |
-#        | salesmanager101 | UserUser123 |
+      | storemanager51  | UserUser123 |
+      | salesmanager101 | UserUser123 |
 
 
