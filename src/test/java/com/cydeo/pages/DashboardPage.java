@@ -27,6 +27,14 @@ public class DashboardPage {
     @FindBy(xpath = "//h1[@class='oro-subtitle']")
     public WebElement pageHeading;
 
+    @FindBy(xpath = "//input[@placeholder='Username or Email']")
+    public WebElement usernamePlaceHolder;
+
+    @FindBy(xpath = "//input[@placeholder='Password']")
+    public WebElement passwordPlaceHolder;
+
+
+
 
 
 

@@ -132,4 +132,17 @@ public class LoginStepDefs {
         String actualPageTitle = Driver.getDriver().getTitle();
         Assert.assertTrue(expectedPageTitle.contains(actualPageTitle));
     }
+
+    @Then("user can see placeholder in username and password input boxes")
+    public void userCanSeePlaceholderInUsernameAndPasswordInputBoxes() {
+        String expectedPlaceholderForUsernameInputBox = "Username or Email";
+        String actualPlaceholderForUsernameInputBox = dashboardPage.usernamePlaceHolder.getAttribute("placeholder");
+        Assert.assertEquals(expectedPlaceholderForUsernameInputBox, actualPlaceholderForUsernameInputBox);
+
+        String expectedPlaceholderForPasswordInputBox = "Password";
+        String actualPlaceholderForPasswordInputBox = dashboardPage.passwordPlaceHolder.getAttribute("placeholder");
+        Assert.assertEquals(expectedPlaceholderForPasswordInputBox, actualPlaceholderForPasswordInputBox);
+
+    }
+
 }

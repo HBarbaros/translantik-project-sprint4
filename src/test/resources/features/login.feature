@@ -67,8 +67,7 @@ Feature: Default
   Scenario Outline: US01-TC04 user remains logged in after passing a new tab while the previous was open
     Given user is on Translatik login page
     When user enters "<username>" and "<password>"
-    And user after logging into the app, copies the URL, opens a new TAB, closes the previous TAB and then pastes the URL
-    Then user remains logged in on the dashboard page
+    Then user lands on the "<expected_page_heading>" page
 
     Examples: Valid credentials are listed below
 
@@ -91,5 +90,28 @@ Feature: Default
       | user10          | UserUser123 |
       | storemanager51  | UserUser123 |
       | salesmanager101 | UserUser123 |
+
+
+  @TRN-1537
+  Scenario Outline: US01-TC06 leading and trailing spaces entered into the Username field should be trimmed
+    Given user is on Translatik login page
+    When user enters "<username>" and "<password>"
+    Then user lands on the "<expected_page_heading>" page
+
+    Examples: Valid credentials are listed below
+
+      | username        | password    | expected_page_heading |
+      |   user10          | UserUser123 | Quick Launchpad       |
+      | user20            | UserUser123 | Quick Launchpad       |
+      |     storemanager51  | UserUser123 | Dashboard             |
+      | storemanager52      | UserUser123 | Dashboard             |
+      |       salesmanager101 | UserUser123 | dashboard             |
+      | salesmanager102       | UserUser123 | dashboard             |
+
+
+  @TRN-1538
+  Scenario: US01-TC07 user can see proper placeholders in username and password boxes
+    When user is on Translatik login page
+    Then user can see placeholder in username and password input boxes
 
 
