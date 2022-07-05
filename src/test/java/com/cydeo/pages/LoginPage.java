@@ -12,10 +12,10 @@ public class LoginPage {
     }
 
     @FindBy(id = "prependedInput")
-    public WebElement loginUser;
+    public WebElement usernameBox;
 
     @FindBy(id = "prependedInput2")
-    public WebElement loginPass;
+    public WebElement passwordBox;
 
     @FindBy(id = "_submit")
     public WebElement loginBtn;
@@ -30,8 +30,8 @@ public class LoginPage {
 
 
     public void login(String username, String password) {
-        loginUser.sendKeys(username);
-        loginPass.sendKeys(password);
+        usernameBox.sendKeys(username);
+        passwordBox.sendKeys(password);
         loginBtn.click();
     }
 

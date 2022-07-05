@@ -7,10 +7,8 @@ import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -31,6 +29,12 @@ public class LoginStepDefs {
         loginPage.login(username, password);
     }
 
+    @When("user enters {string} and {string} with spaces")
+    public void userEntersAndWithSpaces(String username, String password) {
+        String usernameWithSpace = "   "+username+"   ";
+        loginPage.login(usernameWithSpace, password);
+    }
+
     @Then("user lands on the {string} page")
     public void landsOnThePage(String expectedPageHeading) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
@@ -38,7 +42,6 @@ public class LoginStepDefs {
 
         String actualPageHeading = dashboardPage.pageHeading.getText();
         Assert.assertEquals(expectedPageHeading.toLowerCase(), actualPageHeading.toLowerCase());
-
     }
 
     @And("user validates page URL")
@@ -104,7 +107,6 @@ public class LoginStepDefs {
         Driver.getDriver().close();
         Driver.getDriver().switchTo().window(all.get(1));
         Driver.getDriver().get(actualURL);
-
     }
 
     @Then("user remains logged in on the dashboard page")
@@ -114,16 +116,18 @@ public class LoginStepDefs {
         Assert.assertTrue(expectedPageTitle.contains(actualPageTitle));
     }
 
-    @And("user copies the URL, closes the browser, opens a new browser and then pastes the URL")
-    public void userCopiesTheURLClosesTheBrowserOpensANewBrowserAndThenPastesTheURL() {
+    @When("user enters {string} and {string}user can't remain at the {string}")
+    public void userEntersAndUserCanTRemainAtThe(String arg0, String arg1, String arg2) {
+        String urlBeforeClose = Driver.getDriver().getCurrentUrl();
+        String titleBeforeClose = Driver.getDriver().getTitle();
 
-//        String actualURL = Driver.getDriver().getCurrentUrl();
-//
-//        Driver.getDriver().close();
-//
-//        Driver.getDriver().get(ConfigurationReader.getProperty("translantik.url"));
-//        Driver.getDriver().get(actualURL);
+        //We are using Driver.closeDriver() method to get the Driver value null!
+        // Driver.getDriver().close() method didn't work!
+        Driver.closeDriver();
 
+        Driver.getDriver().get(urlBeforeClose + Keys.ENTER);
+        String titleAfterClose = Driver.getDriver().getTitle();
+        Assert.assertNotEquals(titleBeforeClose, titleAfterClose);
     }
 
     @Then("user can't remain logged in on the dashboard page")
@@ -138,11 +142,26 @@ public class LoginStepDefs {
         String expectedPlaceholderForUsernameInputBox = "Username or Email";
         String actualPlaceholderForUsernameInputBox = dashboardPage.usernamePlaceHolder.getAttribute("placeholder");
         Assert.assertEquals(expectedPlaceholderForUsernameInputBox, actualPlaceholderForUsernameInputBox);
+        Assert.assertTrue(dashboardPage.usernamePlaceHolder.isDisplayed());
 
         String expectedPlaceholderForPasswordInputBox = "Password";
         String actualPlaceholderForPasswordInputBox = dashboardPage.passwordPlaceHolder.getAttribute("placeholder");
         Assert.assertEquals(expectedPlaceholderForPasswordInputBox, actualPlaceholderForPasswordInputBox);
+        Assert.assertTrue(dashboardPage.passwordPlaceHolder.isDisplayed());
 
     }
+
+
+    @Then("{string} should be displayed for invalid entry or any empty field")
+    public void warning_messageShouldBeDisplayedForInvalidEntryOrAnyEmptyField(String string) {
+//        String message = loginPage.usernameBox.getAttribute("validationMessage");
+//        System.out.println("message = " + message);
+
+        Assert.assertTrue(loginPage.invalidUsernameOrPasswordError.isDisplayed());
+
+
+    }
+
+
 
 }
