@@ -14,23 +14,13 @@ Feature: Default
 
       | username        | password    | expected_page_heading |
       | user10          | UserUser123 | Quick Launchpad       |
-      | user20          | UserUser123 | Quick Launchpad       |
-      | user21          | UserUser123 | Quick Launchpad       |
-      | user32          | UserUser123 | Quick Launchpad       |
       | storemanager51  | UserUser123 | Dashboard             |
-      | storemanager52  | UserUser123 | Dashboard             |
-      | storemanager71  | UserUser123 | Dashboard             |
-      | storemanager82  | UserUser123 | dashboard             |
       | salesmanager101 | UserUser123 | dashboard             |
-      | salesmanager102 | UserUser123 | dashboard             |
-      | salesmanager121 | UserUser123 | dashboard             |
-      | salesmanager132 | UserUser123 | dashboard             |
 
   @TRN-1531
   Scenario Outline: US01-TC02 can't login with invalid credentials
     Given user is on Translatik login page
     When user enters "<username>" and "<password>"
- #   Then user sees Invalid user name or password message
     Then user remains at the login page
     Examples: Invalid credentials are listed below
 
@@ -63,45 +53,48 @@ Feature: Default
       | storemanager51  | UserUser123 |
       | salesmanager101 | UserUser123 |
 
-  @TRN-1533
+  @TRN-1533 @problem
   Scenario Outline: US01-TC04 user remains logged in after passing a new tab while the previous was open
     Given user is on Translatik login page
     When user enters "<username>" and "<password>"
-    Then user lands on the "<expected_page_heading>" page
+    And copies the URL, opens a new TAB, closes the previous TAB and then pastes the URL
+    Then user remains logged in on the dashboard page "<expected_page_title>"
 
     Examples: Valid credentials are listed below
 
-      | username        | password    |
-      | user10          | UserUser123 |
-      | storemanager51  | UserUser123 |
-      | salesmanager101 | UserUser123 |
+      | username        | password    | expected_page_title |
+      | user10          | UserUser123 | Dashboard           |
+      | storemanager51  | UserUser123 | Dashboard           |
+      | salesmanager101 | UserUser123 | Dashboard           |
 
 
-  @TRN-1534 @problem
+  @TRN-1534 @wip
   Scenario Outline: US01-TC05 user can't remain logged in after quitting browser without logout and passing a new browser
     Given user is on Translatik login page
-    When user enters "<username>" and "<password>"user can't remain at the "<expected_page>"
+    When user enters "<username>" and "<password>"
+    And user copies URL, closes browser, opens new browser and pastes the URL
+    Then user can't remain logged in on the "<expected_page_title>"
 
     Examples: Valid credentials are listed below
 
-      | username        | password    |expected_page |
-      | user10          | UserUser123 |Quick Launchpad       |
-      | storemanager51  | UserUser123 |Dashboard             |
-      | salesmanager101 | UserUser123 |dashboard             |
+      | username        | password    | expected_page_title |
+      | user10          | UserUser123 | Dashboard           |
+      | storemanager51  | UserUser123 | Dashboard           |
+      | salesmanager101 | UserUser123 | Dashboard           |
 
 
-  @TRN-1537
+  @TRN-1537 @wip
   Scenario Outline: US01-TC06 leading and trailing spaces entered into the Username field should be trimmed
     Given user is on Translatik login page
     When user enters "<username>" and "<password>" with spaces
-    Then user lands on the "<expected_page_heading>" page
+    Then user should log in the "<expected_page_title>"
 
     Examples: Valid credentials are listed below
 
-      | username        | password    | expected_page_heading |
-      | user10          | UserUser123 | Quick Launchpad       |
-      | storemanager51  | UserUser123 | Dashboard             |
-      | salesmanager101 | UserUser123 | dashboard             |
+      | username        | password    | expected_page_title |
+      | user10          | UserUser123 | Dashboard           |
+      | storemanager51  | UserUser123 | Dashboard           |
+      | salesmanager101 | UserUser123 | Dashboard           |
 
 
   @TRN-1538
@@ -119,8 +112,8 @@ Feature: Default
       | username       | password    | warning_message              |
       | user10         | invalid     | Invalid username or password |
       | invalid        | UserUser123 | Invalid username or password |
-      | storemanager51 |             | Please fill out this field   |
-      |                | UserUser123 | Please fill out this field   |
-      |                |             | Please fill out this field   |
+#      | storemanager51 |             | Please fill out this field   |
+#      |                | UserUser123 | Please fill out this field   |
+#      |                |             | Please fill out this field   |
 
 

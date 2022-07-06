@@ -36,12 +36,12 @@ public class LoginStepDefs {
     }
 
     @Then("user lands on the {string} page")
-    public void landsOnThePage(String expectedPageHeading) {
+    public void landsOnThePage(String expectedPageTitle) {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 20);
         wait.until(ExpectedConditions.visibilityOf(dashboardPage.pageHeading));
 
         String actualPageHeading = dashboardPage.pageHeading.getText();
-        Assert.assertEquals(expectedPageHeading.toLowerCase(), actualPageHeading.toLowerCase());
+        Assert.assertEquals(expectedPageTitle.toLowerCase(), actualPageHeading.toLowerCase());
     }
 
     @And("user validates page URL")
@@ -67,12 +67,6 @@ public class LoginStepDefs {
         Assert.assertTrue("Breadcrumb element/text is not visible on the page!", actualBreadcrumbText.contains(expected_page_heading.toLowerCase()));
     }
 
-
-    @Then("user sees Invalid user name or password message")
-    public void userSeesInvalidUserNameOrPasswordMessage() {
-        Assert.assertTrue(loginPage.invalidUsernameOrPasswordError.isDisplayed());
-    }
-
     @Then("user remains at the login page")
     public void userRemainsAtTheLoginPage() {
          String expectedURL = "https://qa.translantik.com/user/login";
@@ -93,8 +87,8 @@ public class LoginStepDefs {
         Driver.getDriver().get(urlAfterLogin);
     }
 
-    @And("user after logging into the app, copies the URL, opens a new TAB, closes the previous TAB and then pastes the URL")
-    public void userAfterLoggingIntoTheAppCopiesTheURLOpensANewTABClosesThePreviousTABAndThenPastesTheURL() {
+    @And("copies the URL, opens a new TAB, closes the previous TAB and then pastes the URL")
+    public void copiesTheURLOpensANewTABClosesThePreviousTABAndThenPastesTheURL() {
         String actualURL = Driver.getDriver().getCurrentUrl();
 
         //Open new tab
@@ -104,38 +98,44 @@ public class LoginStepDefs {
         //handling multiple tabs with an ArrayList
         ArrayList<String> all = new ArrayList<String>(Driver.getDriver().getWindowHandles());
 
-        Driver.getDriver().close();
-        Driver.getDriver().switchTo().window(all.get(1));
-        Driver.getDriver().get(actualURL);
+
+//        Driver.getDriver().close();
+        Driver.getDriver().switchTo().window(all.get(0)).close();
+        Driver.getDriver().navigate().to(actualURL);
+
     }
 
-    @Then("user remains logged in on the dashboard page")
-    public void userRemainsLoggedInOnTheDashboardPage() {
-        String expectedPageTitle = "Dashboard Page";
+    @Then("user remains logged in on the dashboard page {string}")
+    public void userRemainsLoggedInOnTheDashboardPage(String expectedPageTitle) {
+        BrowserUtils.sleep(2);
         String actualPageTitle = Driver.getDriver().getTitle();
-        Assert.assertTrue(expectedPageTitle.contains(actualPageTitle));
+        Assert.assertEquals(expectedPageTitle, actualPageTitle);
     }
 
-    @When("user enters {string} and {string}user can't remain at the {string}")
-    public void userEntersAndUserCanTRemainAtThe(String arg0, String arg1, String arg2) {
-        String urlBeforeClose = Driver.getDriver().getCurrentUrl();
-        String titleBeforeClose = Driver.getDriver().getTitle();
+    @And("user copies URL, closes browser, opens new browser and pastes the URL")
+    public void userCopiesURLClosesBrowserOpensNewBrowserAndPastesTheURL() {
+        String currentUrl = Driver.getDriver().getCurrentUrl();
 
         //We are using Driver.closeDriver() method to get the Driver value null!
         // Driver.getDriver().close() method didn't work!
         Driver.closeDriver();
-
-        Driver.getDriver().get(urlBeforeClose + Keys.ENTER);
-        String titleAfterClose = Driver.getDriver().getTitle();
-        Assert.assertNotEquals(titleBeforeClose, titleAfterClose);
+        Driver.getDriver().get(currentUrl + Keys.ENTER);
     }
 
-    @Then("user can't remain logged in on the dashboard page")
-    public void userCanTRemainLoggedInOnTheDashboardPage() {
-        String expectedPageTitle = "Dashboard Page";
+    @Then("user can't remain logged in on the {string}")
+    public void userCanTRemainLoggedInOnThe(String expectedPage) {
+        BrowserUtils.sleep(2); //XXX
         String actualPageTitle = Driver.getDriver().getTitle();
-        Assert.assertTrue(expectedPageTitle.contains(actualPageTitle));
+        Assert.assertNotEquals(expectedPage, actualPageTitle);
     }
+
+    @Then("user should log in the {string}")
+    public void userShouldLogInThe(String expectedPage) {
+        BrowserUtils.sleep(2);
+        String actualPageTitle = Driver.getDriver().getTitle();
+        Assert.assertEquals(expectedPage, actualPageTitle);
+    }
+
 
     @Then("user can see placeholder in username and password input boxes")
     public void userCanSeePlaceholderInUsernameAndPasswordInputBoxes() {
