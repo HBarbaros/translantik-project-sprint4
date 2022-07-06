@@ -1,11 +1,15 @@
 package com.cydeo.pages;
 
+import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 
@@ -35,12 +39,14 @@ public class DashboardPage {
 
 
 
-
-
-
     public void logout(){
-        fullName.click();
-        logOutLink.click();
+        BrowserUtils.sleep(2);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+        wait.until(ExpectedConditions.elementToBeClickable(fullName));
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].click()", fullName);
+        wait.until(ExpectedConditions.elementToBeClickable(logOutLink));
+        js.executeScript("arguments[0].click()", logOutLink);
     }
 
 

@@ -53,7 +53,7 @@ Feature: Default
       | storemanager51  | UserUser123 |
       | salesmanager101 | UserUser123 |
 
-  @TRN-1533 @problem
+  @TRN-1533
   Scenario Outline: US01-TC04 user remains logged in after passing a new tab while the previous was open
     Given user is on Translatik login page
     When user enters "<username>" and "<password>"
@@ -68,7 +68,7 @@ Feature: Default
       | salesmanager101 | UserUser123 | Dashboard           |
 
 
-  @TRN-1534 @wip
+  @TRN-1534
   Scenario Outline: US01-TC05 user can't remain logged in after quitting browser without logout and passing a new browser
     Given user is on Translatik login page
     When user enters "<username>" and "<password>"
@@ -83,7 +83,7 @@ Feature: Default
       | salesmanager101 | UserUser123 | Dashboard           |
 
 
-  @TRN-1537 @wip
+  @TRN-1537
   Scenario Outline: US01-TC06 leading and trailing spaces entered into the Username field should be trimmed
     Given user is on Translatik login page
     When user enters "<username>" and "<password>" with spaces
@@ -102,18 +102,23 @@ Feature: Default
     When user is on Translatik login page
     Then user can see placeholder in username and password input boxes
 
-  @TRN-15xx
+  @TRN-1539
   Scenario Outline: US01-TC08 user receives warning messages for invalid credentials and empty fields
     Given user is on Translatik login page
     When user enters "<username>" and "<password>"
     Then "<warning_message>" should be displayed for invalid entry or any empty field
 
     Examples:
-      | username       | password    | warning_message              |
-      | user10         | invalid     | Invalid username or password |
-      | invalid        | UserUser123 | Invalid username or password |
-#      | storemanager51 |             | Please fill out this field   |
-#      |                | UserUser123 | Please fill out this field   |
-#      |                |             | Please fill out this field   |
+      | username       | password    | warning_message                |
+      | user10         | invalid     | Invalid user name or password. |
+      | invalid        | UserUser123 | Invalid user name or password. |
+      | storemanager51 |             | Please fill in this field.     |
+      |                | UserUser123 | Please fill in this field.     |
+      |                |             | Please fill in this field.     |
 
+  @TRN-15xx
+  Scenario: US01-TC09 user can't see the password entered to the password input box
+    When user is on Translatik login page
+    And user enters password in the "password" input box
+    Then "password" text is toggled to hide its visibility
 

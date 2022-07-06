@@ -70,6 +70,7 @@ public class LoginStepDefs {
     @Then("user remains at the login page")
     public void userRemainsAtTheLoginPage() {
          String expectedURL = "https://qa.translantik.com/user/login";
+         BrowserUtils.sleep(2);
          String actualURL = Driver.getDriver().getCurrentUrl();
 
          Assert.assertEquals(expectedURL, actualURL);
@@ -79,10 +80,6 @@ public class LoginStepDefs {
     public void userCopiesPageURLLogsOutEntersCopiedURL() {
         String urlAfterLogin = Driver.getDriver().getCurrentUrl();
 
-//        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
-//        wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.fullName));
-        BrowserUtils.sleep(3);
-
         dashboardPage.logout();
         Driver.getDriver().get(urlAfterLogin);
     }
@@ -90,24 +87,24 @@ public class LoginStepDefs {
     @And("copies the URL, opens a new TAB, closes the previous TAB and then pastes the URL")
     public void copiesTheURLOpensANewTABClosesThePreviousTABAndThenPastesTheURL() {
         String actualURL = Driver.getDriver().getCurrentUrl();
+        System.out.println("actualURL = " + actualURL);
 
         //Open new tab
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         js.executeScript("window.open();");
 
         //handling multiple tabs with an ArrayList
-        ArrayList<String> all = new ArrayList<String>(Driver.getDriver().getWindowHandles());
-
-
-//        Driver.getDriver().close();
-        Driver.getDriver().switchTo().window(all.get(0)).close();
-        Driver.getDriver().navigate().to(actualURL);
-
+        ArrayList<String> windowHandles = new ArrayList<>(Driver.getDriver().getWindowHandles());
+        Driver.getDriver().switchTo().window(windowHandles.get(0));
+        Driver.getDriver().close();
+        Driver.getDriver().switchTo().window(windowHandles.get(1));
+        Driver.getDriver().get(actualURL);
     }
+
 
     @Then("user remains logged in on the dashboard page {string}")
     public void userRemainsLoggedInOnTheDashboardPage(String expectedPageTitle) {
-        BrowserUtils.sleep(2);
+    //    BrowserUtils.sleep(3);
         String actualPageTitle = Driver.getDriver().getTitle();
         Assert.assertEquals(expectedPageTitle, actualPageTitle);
     }
@@ -136,7 +133,6 @@ public class LoginStepDefs {
         Assert.assertEquals(expectedPage, actualPageTitle);
     }
 
-
     @Then("user can see placeholder in username and password input boxes")
     public void userCanSeePlaceholderInUsernameAndPasswordInputBoxes() {
         String expectedPlaceholderForUsernameInputBox = "Username or Email";
@@ -148,20 +144,34 @@ public class LoginStepDefs {
         String actualPlaceholderForPasswordInputBox = dashboardPage.passwordPlaceHolder.getAttribute("placeholder");
         Assert.assertEquals(expectedPlaceholderForPasswordInputBox, actualPlaceholderForPasswordInputBox);
         Assert.assertTrue(dashboardPage.passwordPlaceHolder.isDisplayed());
-
     }
-
 
     @Then("{string} should be displayed for invalid entry or any empty field")
     public void warning_messageShouldBeDisplayedForInvalidEntryOrAnyEmptyField(String string) {
-//        String message = loginPage.usernameBox.getAttribute("validationMessage");
-//        System.out.println("message = " + message);
 
-        Assert.assertTrue(loginPage.invalidUsernameOrPasswordError.isDisplayed());
+        String messageUsername = loginPage.usernameBox.getAttribute("validationMessage");
+        String messagePassword = loginPage.passwordBox.getAttribute("validationMessage");
 
-
+        if (string.equals(messageUsername)){
+            Assert.assertEquals(string, messageUsername);
+        }else if (string.equals(messagePassword)){
+            Assert.assertEquals(string, messagePassword);
+        }
+        else{
+            String invalidMessage = loginPage.invalidUsernameOrPasswordError.getText();
+            Assert.assertEquals(string, invalidMessage);
+        }
     }
 
+    @And("user enters password in the {string} input box")
+    public void userEntersPasswordInTheInputBox(String password) {
+        loginPage.passwordBox.sendKeys(password);
+        System.out.println("loginPage.passwordBox.getText() = " + loginPage.passwordBox.getText());
+    }
 
+    @Then("{string} text is toggled to hide its visibility")
+    public void textIsToggledToHideItsVisibility(String password) {
 
+        //Assert.assertNotEquals(password, "password");
+    }
 }
