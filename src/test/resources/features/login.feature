@@ -22,7 +22,7 @@ Feature: Default
       | storemanager51  | UserUser123 | Dashboard             |
       | salesmanager101 | UserUser123 | dashboard             |
 
-  @TRN-1531 @AC02
+  @TRN-1531 @AC02a
   Scenario Outline: US01-TC02 can't login with invalid credentials
     When user enters "<username>" and "<password>"
     Then user remains at the login page
@@ -43,7 +43,7 @@ Feature: Default
       | salesmanager121 | User?ser123 |
       |                 |             |
 
-  @TRN-1532 @AC02
+  @TRN-1532 @AC02b
   Scenario Outline: US01-TC03 can't login with old URL after logout
     When user enters "<username>" and "<password>"
     And user copies page URL, logs out, enters copied URL
@@ -56,7 +56,7 @@ Feature: Default
       | storemanager51  | UserUser123 |
       | salesmanager101 | UserUser123 |
 
-  @TRN-1533 @AC03
+  @TRN-1533 @AC03a
   Scenario Outline: US01-TC04 user remains logged in after passing a new tab while the previous was open
     When user enters "<username>" and "<password>"
     And copies the URL, opens a new TAB, closes the previous TAB and then pastes the URL
@@ -70,7 +70,7 @@ Feature: Default
       | salesmanager101 | UserUser123 | Dashboard           |
 
 
-  @TRN-1534 @AC03
+  @TRN-1534 @AC03b
   Scenario Outline: US01-TC05 user can't remain logged in after quitting browser without logout
     When user enters "<username>" and "<password>"
     And user copies URL, closes browser, opens new browser and pastes the URL
@@ -141,7 +141,7 @@ Feature: Default
     Then user sees the success message
 
 
-  @TRN-1569 @AC11 @problem #can't assert if the checkbox is selected or not
+  @TRN-1569 @AC11 @wip
   Scenario: US01-TC13 user can see remember me link on the login page and validate it is clickable
     Then user can verifies the remember me link is displayed
     And user validates the remember me checkbox is clickable
