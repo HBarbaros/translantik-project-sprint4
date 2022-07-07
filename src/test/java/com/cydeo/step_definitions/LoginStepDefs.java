@@ -202,7 +202,7 @@ public class LoginStepDefs {
 
         BrowserUtils.sleep(4);
 
-    //    Assert.assertNotEquals(isSelectedBefore, isSelectedAfter);
+        //    Assert.assertNotEquals(isSelectedBefore, isSelectedAfter);
     }
 
 
@@ -238,15 +238,15 @@ public class LoginStepDefs {
 
 
     @When("user enters valid password to the password input box")
-    public void userEntersValidPasswordToThePasswordInputBox(){
+    public void userEntersValidPasswordToThePasswordInputBox() {
         loginPage.passwordBox.sendKeys(ConfigurationReader.getProperty("valid.password"));
     }
 
     @And("copies the entered password from the password box then the two text shouldn't match")
     public void copiesTheEnteredPasswordFromThePasswordBoxThenTheTwoTextShouldnTMatch() throws IOException, UnsupportedFlavorException {
         BrowserUtils.waitFor(3);
-        loginPage.passwordBox.sendKeys(Keys.chord(Keys.CONTROL,"A"));
-        loginPage.passwordBox.sendKeys(Keys.chord(Keys.CONTROL,"C"));
+        loginPage.passwordBox.sendKeys(Keys.chord(Keys.CONTROL, "A"));
+        loginPage.passwordBox.sendKeys(Keys.chord(Keys.CONTROL, "C"));
         String localClipboardData = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
         Assert.assertNotEquals("UserUser123", localClipboardData);
         System.out.println(localClipboardData);
@@ -260,22 +260,25 @@ public class LoginStepDefs {
 
     @And("user enters username {string} to the box and clicks the request button")
     public void userEntersUsernameToTheBoxAndClicksTheRequestButton(String username) {
-        BrowserUtils.sleep(3);
-        try {
-            System.out.println("forgotPasswordPage.usernameOrEmailBox.isDisplayed() = " + forgotPasswordPage.usernameOrEmailBox.isDisplayed());
-        }
-        catch(NullPointerException e){
-            System.out.println("NullPointerException thrown");
-        }
-        forgotPasswordPage.usernameOrEmailBox.sendKeys("user10");
-        BrowserUtils.sleep(3);
+        BrowserUtils.waitForVisibility(forgotPasswordPage.usernameOrEmailBox, 3);
+        forgotPasswordPage.usernameOrEmailBox.sendKeys(username);
         forgotPasswordPage.requestButton.click();
     }
 
-    @Then("user sees the confirmation message")
-    public void userSeesTheConfirmationMessage() {
+    @Then("user sees the success message")
+    public void userSeesThe() {
         BrowserUtils.sleep(3);
-        wait.until(ExpectedConditions.visibilityOf(forgotPasswordPage.confirmationMessage));
-        forgotPasswordPage.confirmationMessage.getAttribute("validationMessage");
+        wait.until(ExpectedConditions.visibilityOf(forgotPasswordPage.message));
+        String passwordRetrieveMessage = forgotPasswordPage.message.getText();
+        String errorMessage1 = "Unable to send the email.";
+        String errorMessage2 = "There is no active user with username or email address";
+
+        if (passwordRetrieveMessage.contains(errorMessage1)||passwordRetrieveMessage.contains(errorMessage2)){
+            Assert.assertTrue(false);
+        }else{
+            Assert.assertTrue(true);
+        }
+
+
     }
 }

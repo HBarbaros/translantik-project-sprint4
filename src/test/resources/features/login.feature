@@ -129,11 +129,11 @@ Feature: Default
     When user enters valid password to the password input box
     And copies the entered password from the password box then the two text shouldn't match
 
-  @TRN-1568 @AC10 @problem
+  @TRN-1568 @AC10
   Scenario: US01-TC12 users can change their passwords wirth usernames
     When user clicks forgot password link lands on the forgot_password_page
     And user enters username "user10" to the box and clicks the request button
-    Then user sees the confirmation message
+    Then user sees the success message
 
 
   @TRN-1569 @AC11 @problem #can't assert if the checkbox is selected or not
