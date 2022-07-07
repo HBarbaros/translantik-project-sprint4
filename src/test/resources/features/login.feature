@@ -71,7 +71,7 @@ Feature: Default
 
 
   @TRN-1534 @AC03
-  Scenario Outline: US01-TC05 user can't remain logged in after quitting browser without logout and passing a new browser
+  Scenario Outline: US01-TC05 user can't remain logged in after quitting browser without logout
     When user enters "<username>" and "<password>"
     And user copies URL, closes browser, opens new browser and pastes the URL
     Then user can't remain logged in on the "<expected_page_title>"
@@ -119,10 +119,15 @@ Feature: Default
     Then user enters password "credential" in the input box
     And password "credential" text is toggled to hide its visibility
 
-  @TRN-1566 @AC08 @problem #Assertion missing
-  Scenario: US01-TC10 user can't see the password in the source page
-    Then user enters password "credential" in the input box
-  #  And
+  @TRN-1566 @AC08
+  Scenario Outline: US01-TC10 user can't see the password in the source page
+    When user enters "<username>" and "<password>"
+    Then "<password>" shouldn't be displayed in the page source
+
+    Examples: Valid credentials are listed below
+
+      | username        | password    |
+      | user10          | UserUser123 |
 
   @TRN-1567 @AC09
   Scenario: US01-TC11 user can't copy the text entered into the password field
@@ -130,7 +135,7 @@ Feature: Default
     And copies the entered password from the password box then the two text shouldn't match
 
   @TRN-1568 @AC10
-  Scenario: US01-TC12 users can change their passwords wirth usernames
+  Scenario: US01-TC12 users can change their passwords with username
     When user clicks forgot password link lands on the forgot_password_page
     And user enters username "user10" to the box and clicks the request button
     Then user sees the success message

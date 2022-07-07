@@ -176,7 +176,7 @@ public class LoginStepDefs {
     }
 
     @Then("password {string} text is toggled to hide its visibility")
-    public void passwordTextIsToggledToHideItsVisibility(String credential) {
+    public void passwordTextIsToggledToHideItsVisibility() {
         String typeAttribute = loginPage.passwordBox.getAttribute("type");
         Assert.assertEquals(typeAttribute, "password");
     }
@@ -188,21 +188,17 @@ public class LoginStepDefs {
 
     @And("user validates the remember me checkbox is clickable")
     public void userValidatesTheRememberMeCheckboxIsClickable() {
-        String isSelectedBefore = loginPage.rememberMeCheckbox.getAttribute("checked");
+        boolean isSelectedBefore = loginPage.rememberMeCheckbox.isSelected();
         System.out.println("isSelectedBefore = " + isSelectedBefore);
 
-        BrowserUtils.sleep(4);
-
-
-        loginPage.rememberMeCheckbox.click();
         wait.until(ExpectedConditions.elementToBeClickable(loginPage.rememberMeCheckbox));
-        String isSelectedAfter = loginPage.rememberMeCheckbox.getAttribute("checked");
+        loginPage.rememberMeCheckbox.click();
+        BrowserUtils.sleep(4);
+        boolean isSelectedAfter = loginPage.rememberMeCheckbox.isSelected();
 
         System.out.println("isSelectedAfter = " + isSelectedAfter);
 
-        BrowserUtils.sleep(4);
-
-        //    Assert.assertNotEquals(isSelectedBefore, isSelectedAfter);
+        Assert.assertTrue(loginPage.rememberMeCheckbox.isEnabled());
     }
 
 
@@ -274,11 +270,21 @@ public class LoginStepDefs {
         String errorMessage2 = "There is no active user with username or email address";
 
         if (passwordRetrieveMessage.contains(errorMessage1)||passwordRetrieveMessage.contains(errorMessage2)){
-            Assert.assertTrue(false);
+            Assert.fail();
         }else{
             Assert.assertTrue(true);
         }
 
 
     }
+
+
+    @Then("{string} shouldn't be displayed in the page source")
+    public void passwordShouldnTBeDisplayedInThePageSource(String password) {
+        String pageSource = Driver.getDriver().getPageSource();
+        boolean isDisplayed = pageSource.contains(password);
+        Assert.assertFalse(isDisplayed);
+    }
+
+
 }
