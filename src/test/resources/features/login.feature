@@ -114,8 +114,8 @@ Feature: Login functionality
 
   @TRN-1564 @AC07
   Scenario: US01-TC09 user can't see the password entered to the password input box
-    Then user enters password "credential" in the input box
-    And password "credential" text is toggled to hide its visibility
+    Then user enters password in the input box
+    And password text is toggled to hide its visibility
 
   @TRN-1566 @AC08
   Scenario Outline: US01-TC10 user can't see the password in the source page

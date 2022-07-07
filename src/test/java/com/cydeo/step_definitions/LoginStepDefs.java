@@ -110,6 +110,7 @@ public class LoginStepDefs {
 
     @Then("user remains logged in on the dashboard page {string}")
     public void userRemainsLoggedInOnTheDashboardPage(String expectedPageTitle) {
+        wait.until(ExpectedConditions.titleIs(expectedPageTitle));
         String actualPageTitle = Driver.getDriver().getTitle();
         Assert.assertEquals(expectedPageTitle, actualPageTitle);
     }
@@ -167,13 +168,13 @@ public class LoginStepDefs {
         }
     }
 
-    @And("user enters password {string} in the input box")
-    public void userEntersPasswordInTheInputBox(String credential) {
-        loginPage.passwordBox.sendKeys(credential);
+    @And("user enters password in the input box")
+    public void userEntersPasswordInTheInputBox() {
+        loginPage.passwordBox.sendKeys(ConfigurationReader.getProperty("valid.password"));
 
     }
 
-    @Then("password {string} text is toggled to hide its visibility")
+    @Then("password text is toggled to hide its visibility")
     public void passwordTextIsToggledToHideItsVisibility() {
         String typeAttribute = loginPage.passwordBox.getAttribute("type");
         Assert.assertEquals(typeAttribute, "password");
