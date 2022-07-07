@@ -1,7 +1,5 @@
 @login
-Feature: Default
-  User Story :
-  As a user, I should be able to log in.
+Feature: Login functionality
 
   Background:
     Given user is on Translatik login page
@@ -43,18 +41,18 @@ Feature: Default
       | salesmanager121 | User?ser123 |
       |                 |             |
 
-  @TRN-1532 @AC02b
-  Scenario Outline: US01-TC03 can't login with old URL after logout
-    When user enters "<username>" and "<password>"
-    And user copies page URL, logs out, enters copied URL
-    Then user remains at the login page
-
-    Examples: Valid credentials are listed below
-
-      | username        | password    |
-      | user10          | UserUser123 |
-      | storemanager51  | UserUser123 |
-      | salesmanager101 | UserUser123 |
+#  @TRN-1532 @AC02b
+#  Scenario Outline: US01-TC03 can't login with old URL after logout
+#    When user enters "<username>" and "<password>"
+#    And user copies page URL, logs out, enters copied URL
+#    Then user remains at the login page
+#
+#    Examples: Valid credentials are listed below
+#
+#      | username        | password    |
+#      | user10          | UserUser123 |
+#      | storemanager51  | UserUser123 |
+#      | salesmanager101 | UserUser123 |
 
   @TRN-1533 @AC03a
   Scenario Outline: US01-TC04 user remains logged in after passing a new tab while the previous was open
@@ -126,8 +124,8 @@ Feature: Default
 
     Examples: Valid credentials are listed below
 
-      | username        | password    |
-      | user10          | UserUser123 |
+      | username | password    |
+      | user10   | UserUser123 |
 
   @TRN-1567 @AC09
   Scenario: US01-TC11 user can't copy the text entered into the password field
