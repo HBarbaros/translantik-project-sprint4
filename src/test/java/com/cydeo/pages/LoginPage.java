@@ -26,6 +26,11 @@ public class LoginPage {
     @FindBy(xpath = "//div[@class='alert alert-error']//div")
     public WebElement invalidUsernameOrPasswordError;
 
+    @FindBy(xpath = "//a[.='Forgot your password?']")
+    public WebElement forgotYourPasswordLink;
+
+
+
 
 
 

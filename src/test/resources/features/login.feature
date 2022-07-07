@@ -124,15 +124,16 @@ Feature: Default
     Then user enters password "credential" in the input box
   #  And
 
-  @TRN-1567 @AC09 @problem
+  @TRN-1567 @AC09
   Scenario: US01-TC11 user can't copy the text entered into the password field
     When user enters valid password to the password input box
-    And copies the entered password from the password box and pastes it to the username input box
-    Then the two text shouldn't match
+    And copies the entered password from the password box then the two text shouldn't match
 
   @TRN-1568 @AC10 @problem
-  Scenario: US01-TC12 forgot password
-
+  Scenario: US01-TC12 users can change their passwords wirth usernames
+    When user clicks forgot password link lands on the forgot_password_page
+    And user enters username "user10" to the box and clicks the request button
+    Then user sees the confirmation message
 
 
   @TRN-1569 @AC11 @problem #can't assert if the checkbox is selected or not
@@ -163,4 +164,4 @@ Feature: Default
 
   @TRN-1572 @AC13
   Scenario: US01-TC16 validates background color  of login button's hex code: "#0c84a3"
-    Then user validates background color  of login button's hex code: "#0c84a3"
+    Then user validates background color of login button's hex code: "#0c84a3"

@@ -1,6 +1,7 @@
 package com.cydeo.step_definitions;
 
 import com.cydeo.pages.DashboardPage;
+import com.cydeo.pages.ForgotPasswordPage;
 import com.cydeo.pages.LoginPage;
 import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.ConfigurationReader;
@@ -13,12 +14,17 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class LoginStepDefs {
 
     LoginPage loginPage = new LoginPage();
     DashboardPage dashboardPage = new DashboardPage();
+    ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage();
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 
     @Given("user is on Translatik login page")
@@ -200,7 +206,7 @@ public class LoginStepDefs {
     }
 
 
-    @Then("user validates background color  of login button's hex code: {string}")
+    @Then("user validates background color of login button's hex code: {string}")
     public void userValidatesBackgroundColorOfLoginButtonSHexCode(String string) {
         String color = loginPage.loginBtn.getCssValue("background-color"); //color = rgba(12, 132, 163, 1)
         String hexColor = Color.fromString(color).asHex(); //hexColor = #0c84a3
@@ -232,28 +238,44 @@ public class LoginStepDefs {
 
 
     @When("user enters valid password to the password input box")
-    public void userEntersValidPasswordToThePasswordInputBox() {
+    public void userEntersValidPasswordToThePasswordInputBox(){
         loginPage.passwordBox.sendKeys(ConfigurationReader.getProperty("valid.password"));
     }
 
-    @And("copies the entered password from the password box and pastes it to the username input box")
-    public void copiesTheEnteredPasswordFromThePasswordBoxAndPastesItToTheUsernameInputBox() {
-
-
-        loginPage.passwordBox.sendKeys(Keys.CONTROL+"a");
-        loginPage.passwordBox.sendKeys(Keys.CONTROL+"c");
-
-        loginPage.usernameBox.sendKeys(Keys.CONTROL+"v");
-        String pastedText = loginPage.usernameBox.getText();
-        System.out.println("pastedText = " + pastedText);
-
+    @And("copies the entered password from the password box then the two text shouldn't match")
+    public void copiesTheEnteredPasswordFromThePasswordBoxThenTheTwoTextShouldnTMatch() throws IOException, UnsupportedFlavorException {
+        BrowserUtils.waitFor(3);
+        loginPage.passwordBox.sendKeys(Keys.chord(Keys.CONTROL,"A"));
+        loginPage.passwordBox.sendKeys(Keys.chord(Keys.CONTROL,"C"));
+        String localClipboardData = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
+        Assert.assertNotEquals("UserUser123", localClipboardData);
+        System.out.println(localClipboardData);
     }
 
-    @Then("the two text shouldn't match")
-    public void theTwoTextShouldnTMatch() {
+
+    @When("user clicks forgot password link lands on the forgot_password_page")
+    public void userClicksForgotPasswordLinkLandsOnTheForgot_password_page() {
+        loginPage.forgotYourPasswordLink.click();
     }
 
-    @Then("deneme")
-    public void deneme() {
+    @And("user enters username {string} to the box and clicks the request button")
+    public void userEntersUsernameToTheBoxAndClicksTheRequestButton(String username) {
+        BrowserUtils.sleep(3);
+        try {
+            System.out.println("forgotPasswordPage.usernameOrEmailBox.isDisplayed() = " + forgotPasswordPage.usernameOrEmailBox.isDisplayed());
+        }
+        catch(NullPointerException e){
+            System.out.println("NullPointerException thrown");
+        }
+        forgotPasswordPage.usernameOrEmailBox.sendKeys("user10");
+        BrowserUtils.sleep(3);
+        forgotPasswordPage.requestButton.click();
+    }
+
+    @Then("user sees the confirmation message")
+    public void userSeesTheConfirmationMessage() {
+        BrowserUtils.sleep(3);
+        wait.until(ExpectedConditions.visibilityOf(forgotPasswordPage.confirmationMessage));
+        forgotPasswordPage.confirmationMessage.getAttribute("validationMessage");
     }
 }
