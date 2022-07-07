@@ -20,8 +20,8 @@ public class LoginPage {
     @FindBy(id = "_submit")
     public WebElement loginBtn;
 
-    @FindBy(id = "remember_me")
-    public WebElement rememberMeBtn;
+    @FindBy(xpath = "//span[@class='custom-checkbox__icon']")
+    public WebElement rememberMeCheckbox;
 
     @FindBy(xpath = "//div[@class='alert alert-error']//div")
     public WebElement invalidUsernameOrPasswordError;
