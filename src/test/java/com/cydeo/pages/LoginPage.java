@@ -29,6 +29,9 @@ public class LoginPage {
     @FindBy(xpath = "//a[.='Forgot your password?']")
     public WebElement forgotYourPasswordLink;
 
+    @FindBy(xpath = "//span[@class='custom-checkbox__icon']")
+    public WebElement checkBoxAttribute;
+
 
 
 
