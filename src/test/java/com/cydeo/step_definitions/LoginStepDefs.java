@@ -245,7 +245,7 @@ public class LoginStepDefs {
         loginPage.passwordBox.sendKeys(Keys.chord(Keys.CONTROL, "A"));
         loginPage.passwordBox.sendKeys(Keys.chord(Keys.CONTROL, "C"));
         String localClipboardData = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-        Assert.assertNotEquals("UserUser123", localClipboardData);
+        Assert.assertNotEquals(ConfigurationReader.getProperty("valid.password"), localClipboardData);
         System.out.println(localClipboardData);
     }
 
