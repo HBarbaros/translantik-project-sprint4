@@ -177,30 +177,10 @@ public class LoginStepDefs {
         Assert.assertEquals(typeAttribute, "password");
     }
 
-    @Then("user can verifies the remember me link is displayed")
-    public void userCanVerifiesTheRememberMeLinkIsDisplayed() {
-        Assert.assertTrue(loginPage.rememberMeCheckbox.isDisplayed());
-    }
-
     @And("user validates the remember me checkbox is clickable")
     public void userValidatesTheRememberMeCheckboxIsClickable() {
-        wait.until(ExpectedConditions.elementToBeClickable(loginPage.rememberMeCheckbox));
-
-//        Assert.assertFalse(loginPage.rememberMeCheckbox.isSelected());
-
-//        boolean isSelectedBefore = loginPage.rememberMeCheckbox.isSelected();
-//        System.out.println("isSelectedBefore = " + isSelectedBefore);
-
-        wait.until(ExpectedConditions.elementToBeClickable(loginPage.rememberMeCheckbox));
-
-        loginPage.rememberMeCheckbox.click();
-        BrowserUtils.sleep(4);
-
-//        boolean isSelectedAfter = loginPage.rememberMeCheckbox.isSelected();
-//        System.out.println("isSelectedAfter = " + isSelectedAfter);
-//        Assert.assertNotEquals(isSelectedBefore, isSelectedAfter);
-
-        Assert.assertTrue(loginPage.rememberMeCheckbox.isEnabled());
+        BrowserUtils.clickWithJS(loginPage.rememberMeCheckbox);
+        Assert.assertTrue(loginPage.rememberMeCheckbox.isSelected());
     }
 
 

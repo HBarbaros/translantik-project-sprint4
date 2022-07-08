@@ -20,7 +20,7 @@ public class LoginPage {
     @FindBy(id = "_submit")
     public WebElement loginBtn;
 
-    @FindBy(xpath = "//span[@class='custom-checkbox__icon']")
+    @FindBy(xpath = "//*[@type='checkbox']")
     public WebElement rememberMeCheckbox;
 
     @FindBy(xpath = "//div[@class='alert alert-error']//div")
@@ -29,8 +29,6 @@ public class LoginPage {
     @FindBy(xpath = "//a[.='Forgot your password?']")
     public WebElement forgotYourPasswordLink;
 
-    @FindBy(xpath = "//span[@class='custom-checkbox__icon']")
-    public WebElement checkBoxAttribute;
 
 
 

@@ -141,7 +141,6 @@ Feature: Login functionality
 
   @TRN-1569 @AC11 @wip
   Scenario: US01-TC13 user can see remember me link on the login page and validate it is clickable
-    Then user can verifies the remember me link is displayed
     And user validates the remember me checkbox is clickable
 
   @TRN-1570 @AC12a
