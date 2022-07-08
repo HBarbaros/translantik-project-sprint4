@@ -185,11 +185,11 @@ public class LoginStepDefs {
     @And("user validates the remember me checkbox is clickable")
     public void userValidatesTheRememberMeCheckboxIsClickable() {
         wait.until(ExpectedConditions.elementToBeClickable(loginPage.rememberMeCheckbox));
-        loginPage.rememberMeCheckbox.click();
-    //    Assert.assertTrue(loginPage.rememberMeCheckbox.isSelected());
-        Assert.assertTrue(loginPage.rememberMeCheckbox.isDisplayed());
+//        loginPage.rememberMeCheckbox.click();
+//        Assert.assertFalse(loginPage.rememberMeCheckbox.isSelected());
+//        Assert.assertTrue(loginPage.rememberMeCheckbox.isDisplayed());
 
-        /*        boolean isSelectedBefore = loginPage.rememberMeCheckbox.isSelected();
+        boolean isSelectedBefore = loginPage.rememberMeCheckbox.isSelected();
         System.out.println("isSelectedBefore = " + isSelectedBefore);
 
         wait.until(ExpectedConditions.elementToBeClickable(loginPage.rememberMeCheckbox));
@@ -198,8 +198,8 @@ public class LoginStepDefs {
         boolean isSelectedAfter = loginPage.rememberMeCheckbox.isSelected();
 
         System.out.println("isSelectedAfter = " + isSelectedAfter);
-
-        Assert.assertTrue(loginPage.rememberMeCheckbox.isEnabled());*/
+        Assert.assertNotEquals(isSelectedBefore, isSelectedAfter);
+//        Assert.assertTrue(loginPage.rememberMeCheckbox.isEnabled());
     }
 
 
