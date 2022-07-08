@@ -153,18 +153,18 @@ public class LoginStepDefs {
     }
 
     @Then("{string} should be displayed for invalid entry or any empty field")
-    public void warning_messageShouldBeDisplayedForInvalidEntryOrAnyEmptyField(String string) {
+    public void warning_messageShouldBeDisplayedForInvalidEntryOrAnyEmptyField(String message) {
 
-        String messageUsername = loginPage.usernameBox.getAttribute("validationMessage");
-        String messagePassword = loginPage.passwordBox.getAttribute("validationMessage");
+        String actualMessageUsername = loginPage.usernameBox.getAttribute("validationMessage");
+        String actualMessagePassword = loginPage.passwordBox.getAttribute("validationMessage");
 
-        if (string.equals(messageUsername)) {
-            Assert.assertEquals(string, messageUsername);
-        } else if (string.equals(messagePassword)) {
-            Assert.assertEquals(string, messagePassword);
+        if (message.equals(actualMessageUsername)) {
+            Assert.assertEquals(message, actualMessageUsername);
+        } else if (message.equals(actualMessagePassword)) {
+            Assert.assertEquals(message, actualMessagePassword);
         } else {
             String invalidMessage = loginPage.invalidUsernameOrPasswordError.getText();
-            Assert.assertEquals(string, invalidMessage);
+            Assert.assertEquals(message, invalidMessage);
         }
     }
 

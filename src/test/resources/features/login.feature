@@ -102,10 +102,10 @@ Feature: Login functionality
   @TRN-1539 @AC06
   Scenario Outline: US01-TC08 user receives warning messages for invalid credentials and empty fields
     When user enters "<username>" and "<password>"
-    Then "<warning_message>" should be displayed for invalid entry or any empty field
+    Then "<message>" should be displayed for invalid entry or any empty field
 
     Examples:
-      | username       | password    | warning_message                |
+      | username       | password    | message                        |
       | user10         | invalid     | Invalid user name or password. |
       | invalid        | UserUser123 | Invalid user name or password. |
       | storemanager51 |             | Please fill in this field.     |
