@@ -162,19 +162,7 @@ public class LoginStepDefs {
             Assert.assertEquals(message, actualMessageUsername);
         } else if (message.equals(actualMessagePassword)) {
             Assert.assertEquals(message, actualMessagePassword);
-        } /*else {
-            String invalidMessage = loginPage.invalidUsernameOrPasswordError.getText();
-            Assert.assertEquals(message, invalidMessage);
-        }*/
-
-/*        if (message.equals(actualMessageUsername)) {
-            Assert.assertEquals(message, actualMessageUsername);
-        } else if (message.equals(actualMessagePassword)) {
-            Assert.assertEquals(message, actualMessagePassword);
-        } else {
-            String invalidMessage = loginPage.invalidUsernameOrPasswordError.getText();
-            Assert.assertEquals(message, invalidMessage);
-        }*/
+        }
     }
 
     @And("user enters password in the input box")
