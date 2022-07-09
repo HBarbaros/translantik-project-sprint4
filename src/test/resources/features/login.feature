@@ -1,4 +1,4 @@
-@login
+@TRN-1515 @login
 Feature: Login functionality
 
   Background:
