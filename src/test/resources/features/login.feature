@@ -139,7 +139,7 @@ Feature: Login functionality
     Then user sees the success message
 
 
-  @TRN-1569 @AC11 @wip
+  @TRN-1569 @AC11
   Scenario: US01-TC13 user can see remember me link on the login page and validate it is clickable
     And user validates the remember me checkbox is clickable
 
