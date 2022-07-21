@@ -1,5 +1,7 @@
 Feature: Login as different user types
 
+  @TRN-1651
+  Background:
 
   Scenario: login as a driver
     Given the user logged in as "driver"
