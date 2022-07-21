@@ -26,4 +26,12 @@ public class VehicleTableArrangementsStepDefinitions {
         assertThat(actualPerPage, is(int1));
     }
 
+
+    @Then("user validates view per page dropdown has {string}")
+    public void userValidatesViewPerPageDropdownHas(String arg0) {
+        BrowserUtils.sleep(3);
+        vehiclesTablePage.viewPerPageDropdownMenu.click();
+        System.out.println("vehiclesTablePage.viewPerPageDropdownMenu.getText() = " + vehiclesTablePage.viewPerPageDropdownMenu.getText());
+
+    }
 }

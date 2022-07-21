@@ -14,6 +14,9 @@ public class VehiclesTablePage extends BasePage{
     @FindBy(xpath = "//div[@class='page-size pull-right form-horizontal']/div/div/button")
     public WebElement viewPerPageDropdownMenu;
 
+    @FindBy(xpath = "//div[@class='page-size pull-right form-horizontal']/div/div/button/..//ul")
+    public WebElement viewPerPageDropdownList;
+
 
 
 }
