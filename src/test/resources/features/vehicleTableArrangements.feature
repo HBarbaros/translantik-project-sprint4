@@ -10,13 +10,7 @@ Feature: US-004 Vehicle Table Arrangements
     Then user validates default view per page value is 25
 
   @TRN-1655 @AC2
-  Scenario Outline:
-    Then user validates view per page dropdown has "<expected values>"
+  Scenario:
+    Then user validates view per page dropdown has "10", "25", "50", "100" values
 
-    Examples:
-      | expected values |
-      | 10              |
-      | 25              |
-      | 50              |
-      | 100             |
 
