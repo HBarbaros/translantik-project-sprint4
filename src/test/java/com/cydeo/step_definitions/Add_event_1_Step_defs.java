@@ -95,10 +95,11 @@ public class Add_event_1_Step_defs {
     @Then("{string} message should be displayed")
     public void message_should_be_displayed(String expectedBlankMessage) throws InterruptedException {
        // AddEventPopUpPage addEventPopUpPage = new AddEventPopUpPage();
-        String actualBlankMessage = addEventPopUpPage.titleBox.getAttribute("validationMessage");
-        Assert.assertEquals("Verified that :",expectedBlankMessage,actualBlankMessage);
+        WebElement alertElement = Driver.getDriver().findElement(By.xpath("//span[@id='oro_calendar_event_form_title-uid-62db0fe4485f5-error']/span/span"));
+        String actualBlankMessage = alertElement.getText();
         System.out.println("actualBlankMessage = " + actualBlankMessage);
         System.out.println("expectedBlankMessage = " + expectedBlankMessage);
+        Assert.assertEquals("Verified that :",expectedBlankMessage,actualBlankMessage);
         Thread.sleep(2);
         addEventPopUpPage.closePopUp();
     }
