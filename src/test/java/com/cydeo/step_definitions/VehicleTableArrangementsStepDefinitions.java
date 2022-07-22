@@ -1,14 +1,13 @@
 package com.cydeo.step_definitions;
 
 import com.cydeo.pages.BasePage;
-import com.cydeo.pages.VehiclesTablePage;
+import com.cydeo.pages.VehiclesPage;
 import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
@@ -18,12 +17,11 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
 
 public class VehicleTableArrangementsStepDefinitions {
 
     BasePage basePage = new BasePage();
-    VehiclesTablePage vehiclesPage = new VehiclesTablePage();
+    VehiclesPage vehiclesPage = new VehiclesPage();
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 
     @Then("user validates default view per page value is {int}")
@@ -87,27 +85,6 @@ public class VehicleTableArrangementsStepDefinitions {
 
     }
 
-    @When("user clicks the column name")
-    public void userClicksTheColumnName() {
-        BrowserUtils.sleep(5);
-        List<String> allModelYears = BrowserUtils.getElementsText(Driver.getDriver().findElements(By.xpath("//tbody//tr//td[7]")));
-
-        // parse String objects to Integer (no needed, so I commented out)
-        // allModelYears.stream().map(Integer::parseInt).collect(Collectors.toList());
-
-        Collections.sort(allModelYears);
-
-        Collections.sort(allModelYears, Collections.reverseOrder());
-
-
-        System.out.println("allModelYears = " + allModelYears);
-
-
-        vehiclesPage.modelYearColumnName.click();
-
-
-    }
-
 
     @Then("user clicks column name once to sort column ascending")
     public void userClicksColumnNameOnceToSortColumnAscending() {
@@ -133,7 +110,6 @@ public class VehicleTableArrangementsStepDefinitions {
         BrowserUtils.sleep(3);
         Driver.getDriver().navigate().refresh();
 
-
         //get model years after clicking column name
         List<String> modelYearsAscending = BrowserUtils.getElementsText(Driver.getDriver().findElements(By.xpath("//tbody//tr//td[7]")));
 
@@ -146,7 +122,6 @@ public class VehicleTableArrangementsStepDefinitions {
 
     @Then("user clicks column name again to sort descending")
     public void userClicksColumnNameAgainToSortDescending() {
-
 
         //    Collections.sort(modelYearsDefaultOrder, Collections.reverseOrder());
     }
