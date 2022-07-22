@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -14,6 +15,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VehiclesPage extends BasePage{
+
+    public VehiclesPage() {
+        PageFactory.initElements(Driver.getDriver(), this);
+    }
+
+    @FindBy(xpath = "//div[@class='page-size pull-right form-horizontal']/div/div/button")
+    public WebElement viewPerPageDropdownMenu;
+
+    @FindBy(xpath = "//div[@class='page-size pull-right form-horizontal']/div/div/button/..//ul")
+    public WebElement viewPerPageDropdownList;
+
+    @FindBy(xpath = "//div[@class='page-size pull-right form-horizontal']/div/div/button/..//ul/li[1]")
+    public WebElement tenPerPage;
+
+    @FindBy(xpath = "//div[@class='page-size pull-right form-horizontal']/div/div/button/..//ul/li[2]")
+    public WebElement twentyFivePerPage;
+
+    @FindBy(xpath = "//div[@class='page-size pull-right form-horizontal']/div/div/button/..//ul/li[3]")
+    public WebElement fiftyPerPage;
+
+    @FindBy(xpath = "//div[@class='page-size pull-right form-horizontal']/div/div/button/..//ul/li[4]")
+    public WebElement hundredPerPage;
+
+    @FindBy(xpath = "//tr[@class='grid-row']")
+    public WebElement tableRows;
+
+    @FindBy(xpath = "//span[.='Model Year']")
+    public WebElement modelYearColumnName;
+
+    @FindBy(xpath = "//tbody//tr//td[7]")
+    public WebElement allModelYears;
+
+//=========================================================================================//
 
     @FindBy(className = "no-data")
     public WebElement noDataInformer;
@@ -95,6 +129,7 @@ public class VehiclesPage extends BasePage{
     //Vehicle table rows (Ramazan)
     @FindBy(xpath = "//table[@class='grid table-hover table table-bordered table-condensed']/tbody/tr")
     public List <WebElement> vehicleTableRows;
+
 
     //Model Year (Ramazan)
     @FindBy(xpath = "//span[.='Model Year']")
@@ -219,5 +254,9 @@ public class VehiclesPage extends BasePage{
             return false;
         }
     }
+
+
+
+
 
 }

@@ -2,16 +2,14 @@ package com.cydeo.pages;
 
 import com.cydeo.utilities.Driver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-import java.util.List;
-
 public class AddEventPopUpPage extends BasePage{
+
     @FindBy(xpath = "//span[@title='Use calendar color']")
     public WebElement defaultEmptyColorBox;
 
@@ -70,8 +68,6 @@ public class AddEventPopUpPage extends BasePage{
     @FindBy(xpath = "(//div[@class='message'])[1]")
     public WebElement calendarEventSaved;
 
-    @FindBy(xpath = "//span[@id='oro_calendar_event_form_title-uid-62db0fe4485f5-error']/span/span")
-    public WebElement alertElement;
 
     public void closePopUp (){
         Driver.getDriver().findElement(By.xpath("//button[@title='close']")).click();
@@ -88,6 +84,7 @@ public class AddEventPopUpPage extends BasePage{
         }
         return true;
     }
+
 
 
 
