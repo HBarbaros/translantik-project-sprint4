@@ -32,6 +32,12 @@ public class VehiclesTablePage extends BasePage{
     @FindBy(xpath = "//tr[@class='grid-row']")
     public WebElement tableRows;
 
+    @FindBy(xpath = "//span[.='Model Year']")
+    public WebElement modelYearColumnName;
+
+    @FindBy(xpath = "//tbody//tr//td[7]")
+    public WebElement allModelYears;
+
 
 
 

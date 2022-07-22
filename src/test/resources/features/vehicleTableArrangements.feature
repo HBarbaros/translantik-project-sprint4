@@ -13,7 +13,7 @@ Feature: US-004 Vehicle Table Arrangements
   Scenario: View Per Page' should include the values: "10", "25", "50", "100"
     Then user validates view per page dropdown has "10", "25", "50", "100" values
 
-  @TRN-1663 @AC3 @wip
+  @TRN-1663 @AC3
   Scenario Outline: User can arrange rows/vehicle numbers to be displayed by clicking on the 'View Per Page'
     When user selects <number> from view per page button
     Then selected <number> of vehicles should be displayed
@@ -24,3 +24,7 @@ Feature: US-004 Vehicle Table Arrangements
       | 50    |
       | 100   |
 
+  @TRN-16xx @AC4 @wip
+  Scenario:
+    When user clicks column name once to sort column ascending
+#    Then user clicks column name again to sort descending
