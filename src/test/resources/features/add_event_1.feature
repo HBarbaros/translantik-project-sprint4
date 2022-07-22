@@ -35,12 +35,12 @@ Feature: Add Event_1
   Scenario Outline: AC5 If any compulsory field is not filled, "This value should not be blank." message should be displayed <Compulsory Field>
     When Store manager click on any vehicle
     And Store manager can click on addEvent button
-    Then Store manager should not save event without filling out compulsory "<Title>" , "<Organizer display name>", "<Organizer email>"
-    Then "Lütfen bu alanı doldurun." message should be displayed
+    Then Store manager should not save even without filling out compulsory "<Title>" , "<Organizer display name>", "<Organizer email>"
+    Then "This value should not be blank." message should be displayed
     Examples:
-      | Title     | Organizer display name | Organizer email  |
-      |           | Ali                    | dd@mail.com      |
-      | ProMain   |                        | ale1457@mail.com |
-      | Maintaned | Veli                   |                  |
+      | Title  | Organizer display name | Organizer email  |
+      |        | John                   | dd@mail.com      |
+      #| Tranka |                        | ale1457@mail.com |
+      #| Test   | Mike                   |                  |
 
 
