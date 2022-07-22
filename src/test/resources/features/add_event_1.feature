@@ -39,8 +39,8 @@ Feature: Add Event_1
     Then "This value should not be blank." message should be displayed
     Examples:
       | Title  | Organizer display name | Organizer email  |
-      |        | John                   | dd@mail.com      |
-      #| Tranka |                        | ale1457@mail.com |
+     # |        | John                   | dd@mail.com      |
+      | Tranka |                        | ale1457@mail.com |
       #| Test   | Mike                   |                  |
 
 
