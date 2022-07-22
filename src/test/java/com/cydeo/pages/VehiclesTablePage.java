@@ -29,6 +29,9 @@ public class VehiclesTablePage extends BasePage{
     @FindBy(xpath = "//div[@class='page-size pull-right form-horizontal']/div/div/button/..//ul/li[4]")
     public WebElement hundredPerPage;
 
+    @FindBy(xpath = "//tr[@class='grid-row']")
+    public WebElement tableRows;
+
 
 
 
