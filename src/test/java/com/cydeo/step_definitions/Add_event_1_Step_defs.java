@@ -94,14 +94,14 @@ public class Add_event_1_Step_defs {
 
     @Then("{string} message should be displayed")
     public void message_should_be_displayed(String expectedBlankMessage) throws InterruptedException {
-        //AddEventPopUpPage addEventPopUpPage = new AddEventPopUpPage();
-        //String actualBlankMessage = addEventPopUpPage.titleBox.getAttribute("validationMessage");
-        String actualBlankMessage = addEventPopUpPage.alertElement.getText();
+        AddEventPopUpPage addEventPopUpPage = new AddEventPopUpPage();
+        String actualBlankMessage = addEventPopUpPage.titleBox.getAttribute("validationMessage");
         Assert.assertEquals("Verified that :",expectedBlankMessage,actualBlankMessage);
         System.out.println("actualBlankMessage = " + actualBlankMessage);
         System.out.println("expectedBlankMessage = " + expectedBlankMessage);
         Thread.sleep(2);
         addEventPopUpPage.closePopUp();
+
     }
 
 }
