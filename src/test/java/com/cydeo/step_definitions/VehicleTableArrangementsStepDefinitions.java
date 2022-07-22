@@ -26,7 +26,6 @@ public class VehicleTableArrangementsStepDefinitions {
 
     @Then("user validates default view per page value is {int}")
     public void user_validates_default_view_per_page_value_is(Integer value) {
-
         BrowserUtils.sleep(3);
         int actualPerPage = Integer.parseInt(vehiclesPage.viewPerPageDropdownMenu.getText());
         assertThat("default should be 25", actualPerPage, is(value));
@@ -35,7 +34,6 @@ public class VehicleTableArrangementsStepDefinitions {
 
     @Then("user validates view per page dropdown has {string}, {string}, {string}, {string} values")
     public void userValidatesViewPerPageDropdownHasValues(String arg0, String arg1, String arg2, String arg3) {
-
         BrowserUtils.sleep(3);
         vehiclesPage.viewPerPageDropdownMenu.click();
 
@@ -86,8 +84,8 @@ public class VehicleTableArrangementsStepDefinitions {
     }
 
 
-    @Then("user clicks column name once to sort column ascending")
-    public void userClicksColumnNameOnceToSortColumnAscending() {
+    @Then("user clicks column name once to sort column ascending order")
+    public void userClicksColumnNameOnceToSortColumnAscendingOrder() {
         BrowserUtils.sleep(3);
 
         vehiclesPage.viewPerPageDropdownMenu.click();
@@ -98,14 +96,13 @@ public class VehicleTableArrangementsStepDefinitions {
         //get the default order of the column
         List<String> modelYearsDefaultOrder = BrowserUtils.getElementsText(Driver.getDriver().findElements(By.xpath("//tbody//tr//td[7]")));
 
-        //sort model years for assertion
+        //sort model ascending years for assertion
         Collections.sort(modelYearsDefaultOrder);
+        System.out.println("modelYearsSortedOrder = " + modelYearsDefaultOrder);
 
-        //clicked column name to sort the table at UI part
+        //click column name to sort the table at UI part
         BrowserUtils.sleep(3);
         vehiclesPage.modelYearColumnName.click();
-
-        System.out.println("modelYearsDefaultOrder = " + modelYearsDefaultOrder);
 
         BrowserUtils.sleep(3);
         Driver.getDriver().navigate().refresh();
@@ -116,13 +113,28 @@ public class VehicleTableArrangementsStepDefinitions {
         System.out.println("modelYearsAscending = " + modelYearsAscending);
 
         assertThat(modelYearsAscending, equalTo(modelYearsDefaultOrder));
-
-
     }
 
-    @Then("user clicks column name again to sort descending")
-    public void userClicksColumnNameAgainToSortDescending() {
+    @Then("user clicks column name again to sort descending order")
+    public void userClicksColumnNameAgainToSortDescendingOrder() {
+        BrowserUtils.sleep(3);
 
-        //    Collections.sort(modelYearsDefaultOrder, Collections.reverseOrder());
+        //get the current order of the column
+        List<String> modelYearsActualOrder = BrowserUtils.getElementsText(Driver.getDriver().findElements(By.xpath("//tbody//tr//td[7]")));
+
+        //sort model years ascending for assertion
+        Collections.sort(modelYearsActualOrder, Collections.reverseOrder());
+        System.out.println("modelYearsActualOrder = " + modelYearsActualOrder);
+
+        //click column name to sort the table at UI part
+        BrowserUtils.sleep(3);
+        vehiclesPage.modelYearColumnName.click();
+
+        //get model years after clicking column name
+        BrowserUtils.sleep(3);
+        List<String> modelYearsDescending = BrowserUtils.getElementsText(Driver.getDriver().findElements(By.xpath("//tbody//tr//td[7]")));
+        System.out.println("modelYearsDescending = " + modelYearsDescending);
+
+        assertThat(modelYearsDescending, equalTo(modelYearsActualOrder));
     }
 }

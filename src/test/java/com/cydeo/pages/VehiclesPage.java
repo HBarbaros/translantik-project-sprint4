@@ -131,9 +131,7 @@ public class VehiclesPage extends BasePage{
     public List <WebElement> vehicleTableRows;
 
 
-    //Model Year (Ramazan)
-    @FindBy(xpath = "//span[.='Model Year']")
-    public WebElement modelYearLocator;
+
     //Ramazan
     @FindBy (xpath = "//div/button[@class= 'btn dropdown-toggle ']")
     public WebElement button_locator;
