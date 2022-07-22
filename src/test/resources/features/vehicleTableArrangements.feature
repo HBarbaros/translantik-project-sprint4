@@ -28,3 +28,4 @@ Feature: US-004 Vehicle Table Arrangements
   Scenario:
     When user clicks column name once to sort column ascending
 #    Then user clicks column name again to sort descending
+
