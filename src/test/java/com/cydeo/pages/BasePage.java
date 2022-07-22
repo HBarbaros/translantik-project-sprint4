@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class BasePage {
+public abstract class BasePage {
 
     @FindBy(css = "span.title-level-1")
     public List<WebElement> menuOptions;
@@ -34,19 +34,56 @@ public class BasePage {
     @FindBy(linkText = "My User")
     public WebElement myUser;
 
+    @FindBy (xpath = "(//a[@class='dropdown-toggle'])[1]")
+    public WebElement userNameDropDown;
+
     public BasePage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
 
+
+    /**
+     * @return page name, for example: Dashboard
+     */
+    public String getPageSubTitle() {
+        //ant time we are verifying page name, or page subtitle, loader mask appears
+        waitUntilLoaderScreenDisappear();
+//        BrowserUtils.waitForStaleElement(pageSubTitle);
+        return pageSubTitle.getText();
+    }
+
+
+    /**
+     * Waits until loader screen present. If loader screen will not pop up at all,
+     * NoSuchElementException will be handled  bu try/catch block
+     * Thus, we can continue in any case.
+     */
     public void waitUntilLoaderScreenDisappear() {
         try {
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
             wait.until(ExpectedConditions.invisibilityOf(loaderMask));
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public String getUserName(){
+        waitUntilLoaderScreenDisappear();
+        BrowserUtils.waitForVisibility(userName, 10);
+        return userName.getText();
+    }
+
+    public void logOut(){
+        BrowserUtils.waitFor(2);
+        BrowserUtils.clickWithJS(userName);
+        BrowserUtils.clickWithJS(logOutLink);
+    }
+
+    public void goToMyUser(){
+        waitUntilLoaderScreenDisappear();
+        BrowserUtils.waitForClickablility(userName, 5).click();
+        BrowserUtils.waitForClickablility(myUser, 5).click();
     }
 
 

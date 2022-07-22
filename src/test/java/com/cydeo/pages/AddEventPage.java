@@ -5,12 +5,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class VehiclesPage extends BasePage{
-    public VehiclesPage() {
+public class AddEventPage extends BasePage{
+    public AddEventPage(){
         PageFactory.initElements(Driver.getDriver(),this);
     }
-    @FindBy(className = "string-cell_grid-cell_grid-body-cell_grid-body-cell-LicensePlate")
-    public WebElement vehicleRow;
+
+    @FindBy(xpath = "//span[@class='ui-dialog-title']")
+    public WebElement addEventPopup;
+
+    @FindBy(xpath = "//*[contains(text(),'Text') ]")
+    public WebElement title;
+
 
 
 }

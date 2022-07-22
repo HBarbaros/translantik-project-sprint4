@@ -32,7 +32,7 @@ public class Hooks {
     }
 
 
-    @After
+   // @After
     public void teardownScenario(Scenario scenario){
 
         //scenario.isFailed() --> if scenario fails this method will return TRUE boolean value
