@@ -70,6 +70,8 @@ public class AddEventPopUpPage extends BasePage{
     @FindBy(xpath = "(//div[@class='message'])[1]")
     public WebElement calendarEventSaved;
 
+    @FindBy(xpath = "//span[@id='oro_calendar_event_form_title-uid-62db0fe4485f5-error']/span/span")
+    public WebElement alertElement;
 
     public void closePopUp (){
         Driver.getDriver().findElement(By.xpath("//button[@title='close']")).click();
