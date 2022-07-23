@@ -20,7 +20,6 @@ import static org.hamcrest.Matchers.*;
 
 public class VehicleTableArrangementsStepDefinitions {
 
-    BasePage basePage = new BasePage();
     VehiclesPage vehiclesPage = new VehiclesPage();
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
 
