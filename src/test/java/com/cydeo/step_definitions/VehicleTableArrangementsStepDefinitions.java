@@ -84,7 +84,7 @@ public class VehicleTableArrangementsStepDefinitions {
     }
 
 
-    @Then("user clicks column name once to sort column ascending order")
+    @When("user clicks column name once to sort column ascending order")
     public void userClicksColumnNameOnceToSortColumnAscendingOrder() {
         BrowserUtils.sleep(3);
 
