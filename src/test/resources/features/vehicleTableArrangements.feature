@@ -1,4 +1,4 @@
-@TRN-1631 @wip
+@TRN-1631 @test
 Feature: US-004 Vehicle Table Arrangements
 
   Background:
@@ -29,7 +29,7 @@ Feature: US-004 Vehicle Table Arrangements
     When user clicks column name once to sort column ascending order
     Then user clicks column name again to sort descending order
 
-  @TRN-1666 @AC5
+  @TRN-1667 @AC5
   Scenario: User can remove all sorting and filter on the page by using the reset button
 #    When the user click the Model Year button
 #    Then the user click the reset button
