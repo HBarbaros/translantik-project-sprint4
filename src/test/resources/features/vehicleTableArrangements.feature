@@ -31,5 +31,5 @@ Feature: US-004 Vehicle Table Arrangements
 
   @TRN-1667 @AC5
   Scenario: User can remove all sorting and filter on the page by using the reset button
-    When user clicks model year column and sort model years ascending order
-    Then user validates reset button to removes sorting
+    When user clicks model year column and sort vehicles
+    Then user clicks reset button and removes sorting

@@ -137,16 +137,15 @@ public class VehicleTableArrangementsStepDefinitions {
 
     String defaultTableFirstLicensePlate = "";
 
-    @When("user clicks model year column and sort model years ascending order")
-    public void userClicksModelYearColumnAndSortModelYearsAscendingOrder() {
+    @When("user clicks model year column and sort vehicles")
+    public void userClicksModelYearColumnAndSortVehicles() {
         BrowserUtils.waitFor(3);
         defaultTableFirstLicensePlate = vehiclesPage.firstRowLicensePlate.getText();
         vehiclesPage.modelYearColumnName.click();
     }
 
-
-    @Then("user validates reset button to removes sorting")
-    public void userValidatesResetButtonToRemovesSorting() {
+    @Then("user clicks reset button and removes sorting")
+    public void userClicksResetButtonAndRemovesSorting() {
         BrowserUtils.waitFor(3);
         String firstRowLicensePlateAfterSort = vehiclesPage.firstRowLicensePlate.getText();
 
@@ -159,6 +158,5 @@ public class VehicleTableArrangementsStepDefinitions {
         assertThat(firstRowLicensePlateAfterSort, not(equalTo(defaultTableFirstLicensePlate)));
         assertThat(firstRowLicensePlateAfterReset, equalTo(defaultTableFirstLicensePlate));
     }
-
 
 }
