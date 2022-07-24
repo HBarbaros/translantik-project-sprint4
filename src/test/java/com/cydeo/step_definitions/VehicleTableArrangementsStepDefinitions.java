@@ -6,7 +6,9 @@ import com.cydeo.utilities.BrowserUtils;
 import com.cydeo.utilities.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -49,13 +51,12 @@ public class VehicleTableArrangementsStepDefinitions {
         values.add(vehiclesPage.hundredPerPage.getText());     //100
 
         assertThat("values should be displayed", values, equalTo(expectedValues));
-
     }
 
 
     @When("user selects {int} from view per page button")
     public void userSelectsValueFromViewPerPageButton(Integer value) {
-        BrowserUtils.sleep(5);
+        BrowserUtils.sleep(3);
 
         //select the given value from the view per page dropdown
         vehiclesPage.viewPerPageDropdownMenu.click();
@@ -73,7 +74,7 @@ public class VehicleTableArrangementsStepDefinitions {
 
     @Then("selected {int} of vehicles should be displayed")
     public void selectedNumberOfVehiclesShouldBeDisplayed(Integer value) {
-        BrowserUtils.sleep(5);
+        BrowserUtils.sleep(3);
 
         //collect all webElements inside a List to get the number of elements
         List<WebElement> rows = Driver.getDriver().findElements(By.xpath("//tr[@class='grid-row']"));
@@ -98,7 +99,6 @@ public class VehicleTableArrangementsStepDefinitions {
 
         //sort model ascending years for assertion
         Collections.sort(modelYearsDefaultOrder);
-        System.out.println("modelYearsSortedOrder = " + modelYearsDefaultOrder);
 
         //click column name to sort the table at UI part
         BrowserUtils.sleep(3);
@@ -110,8 +110,6 @@ public class VehicleTableArrangementsStepDefinitions {
         //get model years after clicking column name
         List<String> modelYearsAscending = BrowserUtils.getElementsText(Driver.getDriver().findElements(By.xpath("//tbody//tr//td[7]")));
 
-        System.out.println("modelYearsAscending = " + modelYearsAscending);
-
         assertThat(modelYearsAscending, equalTo(modelYearsDefaultOrder));
     }
 
@@ -120,11 +118,10 @@ public class VehicleTableArrangementsStepDefinitions {
         BrowserUtils.sleep(3);
 
         //get the current order of the column
-        List<String> modelYearsActualOrder = BrowserUtils.getElementsText(Driver.getDriver().findElements(By.xpath("//tbody//tr//td[7]")));
+        List<String> modelYearsAfterReSorting = BrowserUtils.getElementsText(Driver.getDriver().findElements(By.xpath("//tbody//tr//td[7]")));
 
         //sort model years ascending for assertion
-        Collections.sort(modelYearsActualOrder, Collections.reverseOrder());
-        System.out.println("modelYearsActualOrder = " + modelYearsActualOrder);
+        Collections.sort(modelYearsAfterReSorting, Collections.reverseOrder());
 
         //click column name to sort the table at UI part
         BrowserUtils.sleep(3);
@@ -133,8 +130,35 @@ public class VehicleTableArrangementsStepDefinitions {
         //get model years after clicking column name
         BrowserUtils.sleep(3);
         List<String> modelYearsDescending = BrowserUtils.getElementsText(Driver.getDriver().findElements(By.xpath("//tbody//tr//td[7]")));
-        System.out.println("modelYearsDescending = " + modelYearsDescending);
 
-        assertThat(modelYearsDescending, equalTo(modelYearsActualOrder));
+        assertThat(modelYearsDescending, equalTo(modelYearsAfterReSorting));
     }
+
+
+    String defaultTableFirstLicensePlate = "";
+
+    @When("user clicks model year column and sort model years ascending order")
+    public void userClicksModelYearColumnAndSortModelYearsAscendingOrder() {
+        BrowserUtils.waitFor(3);
+        defaultTableFirstLicensePlate = vehiclesPage.firstRowLicensePlate.getText();
+        vehiclesPage.modelYearColumnName.click();
+    }
+
+
+    @Then("user validates reset button to removes sorting")
+    public void userValidatesResetButtonToRemovesSorting() {
+        BrowserUtils.waitFor(3);
+        String firstRowLicensePlateAfterSort = vehiclesPage.firstRowLicensePlate.getText();
+
+        //reset sorting
+        vehiclesPage.resetButton_Locator.click();
+        BrowserUtils.waitFor(3);
+        String firstRowLicensePlateAfterReset = vehiclesPage.firstRowLicensePlate.getText();
+
+        //Assert that the first vehicle license plate is same with the default table first vehicle
+        assertThat(firstRowLicensePlateAfterSort, not(equalTo(defaultTableFirstLicensePlate)));
+        assertThat(firstRowLicensePlateAfterReset, equalTo(defaultTableFirstLicensePlate));
+    }
+
+
 }
