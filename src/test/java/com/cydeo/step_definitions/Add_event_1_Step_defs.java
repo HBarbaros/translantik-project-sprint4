@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class Add_event_1_Step_defs {
     }
 
     @Then("Store manager should not save even without filling out compulsory {string} , {string}, {string}")
-    public void store_manager_should_not_save_even_without_filling_out_compulsory(String title, String organizerName, String organizerEmail) throws InterruptedException {
+    public void store_manager_should_not_save_even_without_filling_out_compulsory(String title, String organizerName, String organizerEmail) throws InterruptedException, NoSuchElementException {
         //AddEventPopUpPage addEventPopUpPage = new AddEventPopUpPage();
         addEventPopUpPage.titleBox.sendKeys(title);
         BrowserUtils.waitFor(3);
@@ -87,12 +88,14 @@ public class Add_event_1_Step_defs {
         addEventPopUpPage.organizerEmailBox.sendKeys(organizerEmail);
         BrowserUtils.waitFor(3);
         addEventPopUpPage.saveButton.click();
-        BrowserUtils.waitFor(3);
-        Assert.assertFalse(addEventPopUpPage.calendarEventSaved.isDisplayed());
 
+        WebElement saveConfirmation = Driver.getDriver().findElement(By.xpath("//div[text()='Calendar event saved']"));
+        Assert.assertFalse(saveConfirmation.isDisplayed());
+
+        //addEventPopUpPage.closePopUp();
     }
 
-    @Then("{string} message should be displayed")
+    /* @Then("{string} message should be displayed")
     public void message_should_be_displayed(String expectedBlankMessage) throws InterruptedException {
         AddEventPopUpPage addEventPopUpPage = new AddEventPopUpPage();
         String actualBlankMessage = addEventPopUpPage.titleBox.getAttribute("validationMessage");
@@ -103,6 +106,8 @@ public class Add_event_1_Step_defs {
         addEventPopUpPage.closePopUp();
 
     }
+
+     */
 
 }
 
