@@ -52,7 +52,6 @@ public class VehicleTableView_StepDefinitions {
         vehiclesPage.backPageArrow.click();
         Assert.assertTrue("User can not go to the next page",
                 vehiclesPage.page_number_input_widget.getAttribute("value").equals("1"));
-
     }
 
     @Then("user should see total recordings of vehicles")
