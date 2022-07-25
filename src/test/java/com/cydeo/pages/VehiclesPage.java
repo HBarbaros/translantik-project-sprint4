@@ -47,6 +47,12 @@ public class VehiclesPage extends BasePage{
     @FindBy(xpath = "//tbody//tr//td[7]")
     public WebElement allModelYears;
 
+    @FindBy(xpath = "//tbody//tr[1]//td[2]")
+    public WebElement firstRowLicensePlate;
+
+    @FindBy(xpath = "//*[@id=\"grid-custom-entity-grid-246958702\"]/div[2]/div[1]/div/div[3]/div[1]/div/a[3]/i")
+    public WebElement resetButton;
+
 //=========================================================================================//
 
     @FindBy(className = "no-data")
@@ -132,9 +138,7 @@ public class VehiclesPage extends BasePage{
     public List <WebElement> vehicleTableRows;
 
 
-    //Model Year (Ramazan)
-    @FindBy(xpath = "//span[.='Model Year']")
-    public WebElement modelYearLocator;
+
     //Ramazan
     @FindBy (xpath = "//div/button[@class= 'btn dropdown-toggle ']")
     public WebElement button_locator;
