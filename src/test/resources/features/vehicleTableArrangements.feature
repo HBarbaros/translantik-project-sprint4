@@ -1,4 +1,4 @@
-@TRN-1631
+@TRN-1631 @test
 Feature: US-004 Vehicle Table Arrangements
 
   Background:
@@ -24,8 +24,12 @@ Feature: US-004 Vehicle Table Arrangements
       | 50    |
       | 100   |
 
-  @TRN-16xx @AC4 @wip
-  Scenario:
-    When user clicks column name once to sort column ascending
-#    Then user clicks column name again to sort descending
+  @TRN-1666 @AC4
+  Scenario: User can sort a column in ascending or descending order by clicking the column name
+    When user clicks column name once to sort column ascending order
+    Then user clicks column name again to sort descending order
 
+  @TRN-1667 @AC5
+  Scenario: User can remove all sorting and filter on the page by using the reset button
+    When user clicks model year column and sort vehicles
+    Then user clicks reset button and removes sorting
