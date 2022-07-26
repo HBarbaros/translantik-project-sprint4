@@ -47,6 +47,12 @@ public class VehiclesPage extends BasePage{
     @FindBy(xpath = "//tbody//tr//td[7]")
     public WebElement allModelYears;
 
+    @FindBy(xpath = "//tbody//tr[1]//td[2]")
+    public WebElement firstRowLicensePlate;
+
+    @FindBy(xpath = "//*[@id=\"grid-custom-entity-grid-246958702\"]/div[2]/div[1]/div/div[3]/div[1]/div/a[3]/i")
+    public WebElement resetButton;
+
 //=========================================================================================//
 
     @FindBy(className = "no-data")
@@ -58,6 +64,7 @@ public class VehiclesPage extends BasePage{
     @FindBy(xpath = "//label[@class='dib'][2]")
     public WebElement lastPageNum;
 
+    //@FindBy(xpath = "//i[@class='fa-chevron-right hide-text']")
     @FindBy(css = "i[class='fa-chevron-right hide-text']")
     public WebElement forwardPageArrow;
 
@@ -131,9 +138,7 @@ public class VehiclesPage extends BasePage{
     public List <WebElement> vehicleTableRows;
 
 
-    //Model Year (Ramazan)
-    @FindBy(xpath = "//span[.='Model Year']")
-    public WebElement modelYearLocator;
+
     //Ramazan
     @FindBy (xpath = "//div/button[@class= 'btn dropdown-toggle ']")
     public WebElement button_locator;
@@ -175,6 +180,27 @@ public class VehiclesPage extends BasePage{
     //Driver column da yer alanlar (Salih)
     @FindBy(xpath = "//td[@data-column-label='Location']")
     public List<WebElement> columnText2;
+
+    @FindBy (xpath = "//div[@class='other-scroll-container']")
+    public WebElement all_cars_table_on_vehicles_page;
+
+    @FindBy (xpath = "//input[@class='input-widget']")
+    public WebElement page_number_input_widget;
+
+    @FindBy (xpath = "//i[@class='fa-chevron-left hide-text']")
+    public WebElement backPageArrow;
+
+    @FindBy (xpath = "//div[@class='extra-actions-panel']/div/div/a")
+    public WebElement export_grid_link;
+
+    @FindBy (xpath = "//div[@class='btn-group open']/ul/li[1]")
+    public WebElement csv_download_link;
+
+    @FindBy (xpath = "//div[@class='btn-group open']/ul/li[2]")
+    public WebElement xlsx_download_link;
+
+    @FindBy (xpath = "//div[.='Export started successfully. You will receive email notification upon completion.']")
+    public WebElement export_confirmation_message;
 
     //her filtrenin altında çıkan metodlar
     public List<WebElement>columnText3(String subMethodName){
