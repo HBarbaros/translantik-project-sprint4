@@ -220,7 +220,7 @@ public class VehiclesPage extends BasePage{
 
 
 
-    public void selectAnyRowOfAllCarsTable(int rowNum1to25) {
+    public void selectAnyRowOfAllCarsTable(String rowNum1to25) {
         BrowserUtils.waitForClickablility(Driver.getDriver().findElement(By.xpath("//tr[@class='grid-row row-click-action']["+rowNum1to25+"]")),10);
         Driver.getDriver().findElement(By.xpath("//tr[@class='grid-row row-click-action']["+rowNum1to25+"]")).click();
     }
@@ -240,6 +240,7 @@ public class VehiclesPage extends BasePage{
      */
     public void goThreeDot(String head,String value){
         String xpath = "//td[contains(@class,'-cell grid-cell grid-body-cell grid-body-cell-"+head+"')][.='"+value+"']/..//a/..";
+        //(//td[@class='action-cell grid-cell grid-body-cell']/div[1]/div[1]/a)[1]
         WebElement element = Driver.getDriver().findElement(By.xpath(xpath));
         BrowserUtils.waitForClickablility(element,5);
         new Actions(Driver.getDriver()).moveToElement(element).pause(2000).doubleClick(element).build().perform();
