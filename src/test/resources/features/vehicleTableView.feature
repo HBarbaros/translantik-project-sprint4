@@ -1,4 +1,4 @@
-@TRN-1641
+@TRN-1641 @smoke
 Feature: All vehicle information should be seen.
   As a user, I should be able to see all vehicle information in a table under Fleet-Vehicle page
 
