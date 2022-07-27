@@ -1,4 +1,4 @@
-@TRN-1631 @test
+@TRN-1631 @smoke
 Feature: US-004 Vehicle Table Arrangements
 
   Background:
