@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VehicleTableView_StepDefinitions {
     VehiclesPage vehiclesPage = new VehiclesPage();
-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 15);
 
     @Then("All vehicles information table should be seen under Fleet-Vehicle page")
     public void all_vehicles_information_table_should_be_seen_under_fleet_vehicle_page() {
