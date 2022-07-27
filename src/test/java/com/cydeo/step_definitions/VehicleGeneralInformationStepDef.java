@@ -6,6 +6,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
+import java.util.List;
+
 public class VehicleGeneralInformationStepDef {
 
     VehiclesPage vehiclesPage = new VehiclesPage();
@@ -24,9 +26,9 @@ public class VehicleGeneralInformationStepDef {
     }
 
     @When("user on All Cars page and user clicks any three dot at the end of the row and clicks Eye {string} icon")
-    public void userOnAllCarsPageAndUserClicksAnyThreeDotAtTheEndOfTheRowAndClicksEyeIcon(String view) {
-        vehiclesPage.goThreeDot("ChassisNumber", "234,098");
-        vehiclesPage.getThreeDotIcon(view).click();
+    public void userOnAllCarsPageAndUserClicksAnyThreeDotAtTheEndOfTheRowAndClicksEyeIcon(String iconName) {
+        vehiclesPage.goThreeDot();
+        vehiclesPage.getThreeDotIcon(iconName).click();
     }
 
     @When("user clicks {string} .row")
@@ -36,13 +38,23 @@ public class VehicleGeneralInformationStepDef {
 
     @Then("Edit, Delete, and Add Event button should be displayed")
     public void editDeleteAndAddEventButtonShouldBeDisplayed() {
+        Assert.assertTrue(generalInformationPage.editCarButton.isDisplayed());
+        Assert.assertTrue(generalInformationPage.deleteCarButton.isDisplayed());
+        Assert.assertTrue(generalInformationPage.addEventButton.isDisplayed());
     }
+
+    List<String> allInfoOfVehiclePage;
 
     @Then("check and store all information of {string} .row")
     public void checkAndStoreAllInformationOfRow(String row) {
+        allInfoOfVehiclePage = vehiclesPage.getAllInfoOfRow(row);
     }
 
     @Then("verify the all information are all same for both pages")
     public void verifyTheAllInformationAreAllSameForBothPages() {
+        List<String> allInfoOfGeneralInformationPage = generalInformationPage.getAllInfoOfGeneralInformation();
+        System.out.println("allInfoOdVehiclePage = " + allInfoOfVehiclePage);
+        System.out.println("allInfoOfGeneralInformationPage = " + allInfoOfGeneralInformationPage);
+        Assert.assertEquals(allInfoOfVehiclePage,allInfoOfGeneralInformationPage);
     }
 }

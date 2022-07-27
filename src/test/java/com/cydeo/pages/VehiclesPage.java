@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.swing.text.View;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -230,17 +231,10 @@ public class VehiclesPage extends BasePage{
         return Driver.getDriver().findElement(By.xpath(xpath));
     }
 
-    /**
-     * This method will click on three dot of a row depend on specific head and value param in translantik application.
-     * For example: if head is equals to ChassisNumber, and value equals to 123,325,
-     * Then method will click on the three dot of the row whose ChassisNumber value equals 123,325
-     *
-     * @param head
-     * @param value
-     */
-    public void goThreeDot(String head,String value){
-        String xpath = "//td[contains(@class,'-cell grid-cell grid-body-cell grid-body-cell-"+head+"')][.='"+value+"']/..//a/..";
-        //(//td[@class='action-cell grid-cell grid-body-cell']/div[1]/div[1]/a)[1]
+
+    public void goThreeDot(){
+        //(//td[@class='action-cell grid-cell grid-body-cell']/div[1]/div[1]/a)[1] // three dot button
+        String xpath = "(//td[@class='action-cell grid-cell grid-body-cell']/div[1]/div[1]/a)[1]";
         WebElement element = Driver.getDriver().findElement(By.xpath(xpath));
         BrowserUtils.waitForClickablility(element,5);
         new Actions(Driver.getDriver()).moveToElement(element).pause(2000).doubleClick(element).build().perform();
@@ -252,9 +246,10 @@ public class VehiclesPage extends BasePage{
     }
     public WebElement getThreeDotIcon(String iconName){
         return Driver.getDriver().findElement(By.xpath("//ul[@class='dropdown-menu dropdown-menu__action-cell launchers-dropdown-menu detach dropdown-menu__floating']//a[@title='"+iconName+"']"));
+        //ul[@class='dropdown-menu dropdown-menu__action-cell launchers-dropdown-menu']//a[@title='View']
     }
 
-    public List<String> getAllInfoOfRow(int rowNumber) {
+    public List<String> getAllInfoOfRow(String rowNumber) {
         List<WebElement> getAllInfo = new ArrayList<>();
         for (int i = 2; i < 21; i++) {
             getAllInfo.add(Driver.getDriver().findElement(By.xpath("//tr[@class='grid-row row-click-action']["+rowNumber+"]//td["+i+"]")));
