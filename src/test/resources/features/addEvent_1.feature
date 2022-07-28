@@ -1,4 +1,4 @@
-@TRN-1652
+@TRN-1652 @smoke
 Feature: Default
 
 
