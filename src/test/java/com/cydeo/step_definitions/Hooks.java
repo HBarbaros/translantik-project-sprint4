@@ -19,11 +19,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Hooks {
 
-    @Before
+    @Before ("@id")
     public void setUp(){
-        Driver.getDriver().manage().window().maximize();
-        Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
         Driver.getDriver().get(ConfigurationReader.getProperty("url"));
         LoginPage loginPage=new LoginPage();
         loginPage.loginAsStoreManager();
@@ -31,6 +28,8 @@ public class Hooks {
         loginPage.navigateToModule("Fleet","Vehicles");
         loginPage.waitUntilLoaderScreenDisappear();
     }
+
+
 
     //import from io.cucumber.java not from junit
     //@Before(order = 1)
