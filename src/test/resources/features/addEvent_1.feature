@@ -1,5 +1,5 @@
 @TRN-1652 @id @smoke
-Feature: Default
+Feature: US-05 Add Event-1
 
   @TRN-1648 @TRN-1649 @id
   Scenario: US005-AC1-Ilker-Verify that Store Manager can access "General Information" page by clicking on any vehicle/row

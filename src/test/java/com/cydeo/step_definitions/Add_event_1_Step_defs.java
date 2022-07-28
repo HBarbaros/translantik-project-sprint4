@@ -96,9 +96,7 @@ public class Add_event_1_Step_defs {
         WebElement saveConfirmation = Driver.getDriver().findElement(By.xpath("//div[text()='Calendar event saved']"));
         Assert.assertFalse(saveConfirmation.isDisplayed());
 
-        if (addEventPopUpPage.saveButton.isDisplayed()){
-            addEventPopUpPage.closePopUp();
-        }
+
 
     }
 
