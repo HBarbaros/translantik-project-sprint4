@@ -36,7 +36,6 @@ Feature: Default
     When Store manager click on any vehicle
     And Store manager can click on addEvent button
     Then Store manager should not save even without filling out compulsory "<Title>" , "<Organizer display name>", "<Organizer email>"
-		   # Then "This value should not be blank." message should be displayed
     Examples:
       | Title  | Organizer display name | Organizer email  |
       | Tranka |                        | ale1457@mail.com |
