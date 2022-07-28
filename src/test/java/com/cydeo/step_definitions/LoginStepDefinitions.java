@@ -1,5 +1,6 @@
 package com.cydeo.step_definitions;
 
+import com.cydeo.pages.BasePage;
 import com.cydeo.pages.LoginPage;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
@@ -30,6 +31,10 @@ public class LoginStepDefinitions{
         new LoginPage().login(username,password);
     }
 
+    @When("the user navigates to {string} {string}")
+    public void the_user_navigates_to(String tab, String module) {
+        new BasePage().navigateToModule(tab,module);
+    }
 
 
 }
