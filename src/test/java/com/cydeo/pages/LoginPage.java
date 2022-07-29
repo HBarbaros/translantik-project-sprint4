@@ -46,7 +46,7 @@ public class LoginPage extends BasePage{
     }
 
     public void loginAsStoreManager(){
-        String username= ConfigurationReader.getProperty("store_manager_username");
+        String username= ConfigurationReader.getProperty("store_manager_username85");
         String pwd=ConfigurationReader.getProperty("store_manager_password");
 
         userName.sendKeys(username);
