@@ -60,7 +60,7 @@ public class Add_event_1_Step_defs {
         String actualTitle = Driver.getDriver().findElement(By.xpath("//span[text()='Add Event']")).getText();
         System.out.println("actualTitle = " + actualTitle);
         Assert.assertEquals("Verify that :", expectedTitle, actualTitle);
-        Thread.sleep(10);
+        Thread.sleep(5);
         addEventPopUpPage.closePopUp();
     }
 

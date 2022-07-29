@@ -24,11 +24,7 @@ Feature: US-005 Add Event-1
       | Start                  |
       | End                    |
 
-  @TRN-1664 @TRN-1649 @id
-  Scenario: US005-AC3-Verify that the "Add Event" page should pop up, after clicking on the "Add event" button,
-    When Store manager click on any vehicle
-    When Store manager can click on addEvent button
-    Then "Add Event" Page opens
+
 
   @TRN-1665 @TRN-1649 @id
   Scenario Outline: US005-AC5-Verify that  if any compulsory field is not filled, "This value should not be blank." message should be displayed after clicking on the save button.
@@ -40,3 +36,10 @@ Feature: US-005 Add Event-1
       | Tranka |                        | ale1457@mail.com |
       | Test   | Mike                   |                  |
     #  |        | John                   | dd@mail.com      |
+
+
+  @TRN-1664 @TRN-1649 @id
+  Scenario: US005-AC3-Verify that the "Add Event" page should pop up, after clicking on the "Add event" button,
+    When Store manager click on any vehicle
+    When Store manager can click on addEvent button
+    Then "Add Event" Page opens
