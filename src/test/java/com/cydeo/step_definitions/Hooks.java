@@ -5,6 +5,8 @@ In the class we will be able to pass pre- & post- conditions to
  each scenario and each step
  */
 
+import com.cydeo.pages.LoginPage;
+import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -13,7 +15,21 @@ import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import java.util.concurrent.TimeUnit;
+
 public class Hooks {
+
+    @Before ("@id")
+    public void setUp(){
+        Driver.getDriver().get(ConfigurationReader.getProperty("url"));
+        LoginPage loginPage=new LoginPage();
+        loginPage.loginAsStoreManager();
+        loginPage.waitUntilLoaderScreenDisappear();
+        loginPage.navigateToModule("Fleet","Vehicles");
+        loginPage.waitUntilLoaderScreenDisappear();
+    }
+
+
 
     //import from io.cucumber.java not from junit
     //@Before(order = 1)

@@ -474,5 +474,16 @@ for given duration
         new WebDriverWait(Driver.getDriver(), time).until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
+    public static boolean isClicked(WebElement element)
+    {
+        try {
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 5);
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            element.click();
+            return true;
+        } catch(Exception e){
+            return false;
+        }
+    }
 
 }
