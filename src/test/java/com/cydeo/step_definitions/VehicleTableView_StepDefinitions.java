@@ -75,12 +75,14 @@ public class VehicleTableView_StepDefinitions {
     @When("User clicks on export grid link")
     public void userClicksOnExportGridLink() {
         Driver.getDriver().navigate().refresh();
-        wait.until(ExpectedConditions.elementToBeClickable(vehiclesPage.export_grid_link));
+//        wait.until(ExpectedConditions.elementToBeClickable(vehiclesPage.export_grid_link));
+        BrowserUtils.sleep(2);
         vehiclesPage.export_grid_link.click();
     }
 
     @And("User clicks on CSV link")
     public void userClicksOnCSVLink() {
+        BrowserUtils.sleep(2);
         vehiclesPage.csv_download_link.click();
     }
 
@@ -92,6 +94,7 @@ public class VehicleTableView_StepDefinitions {
 
     @And("User clicks on XLS link")
     public void userClicksOnXLSLink() {
+        BrowserUtils.sleep(2);
         vehiclesPage.xlsx_download_link.click();
     }
 }
