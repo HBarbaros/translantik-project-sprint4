@@ -32,11 +32,11 @@ Feature: All vehicle information should be seen.
     Then User can download table data
 
   @TRN-1677
-    Scenario: User can download table data in CSV format from
-    "Export Grid" (a confirmation message is enough to validate)
-      When User clicks on export grid link
-      And User clicks on CSV link
-      Then User can download table data
+  Scenario: User can download table data in CSV format from
+  "Export Grid" (a confirmation message is enough to validate)
+    When User clicks on export grid link
+    And User clicks on CSV link
+    Then User can download table data
 
 
 
