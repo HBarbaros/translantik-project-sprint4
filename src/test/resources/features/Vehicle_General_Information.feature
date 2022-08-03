@@ -1,4 +1,4 @@
-@TRN-1661
+@TRN-1661 @smoke
 Feature: Default
 
   Background:

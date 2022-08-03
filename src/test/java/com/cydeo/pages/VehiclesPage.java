@@ -221,7 +221,7 @@ public class VehiclesPage extends BasePage{
 
 
 
-    public void selectAnyRowOfAllCarsTable(String rowNum1to25) {
+    public void selectAnyRowOfAllCarsTable(int rowNum1to25) {
         BrowserUtils.waitForClickablility(Driver.getDriver().findElement(By.xpath("//tr[@class='grid-row row-click-action']["+rowNum1to25+"]")),10);
         Driver.getDriver().findElement(By.xpath("//tr[@class='grid-row row-click-action']["+rowNum1to25+"]")).click();
     }

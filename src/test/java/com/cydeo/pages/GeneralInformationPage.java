@@ -27,6 +27,9 @@ public class GeneralInformationPage {
     @FindBy (xpath = "//a[@class='btn icons-holder-text no-hash']")
     public WebElement addEventButton;
 
+    @FindBy(xpath = "//h5/span")
+    public WebElement pageTitle;
+
     public List<String> getAllInfoOfGeneralInformation(){
         List<String> info = new ArrayList<>();
         for (int i = 1; i < 20 ; i++) {

@@ -14,8 +14,9 @@ public class VehicleGeneralInformationStepDef {
     GeneralInformationPage generalInformationPage = new GeneralInformationPage();
 
     @When("user on All Cars page and user clicks {string} .row on the All Cars page")
-    public void userOnAllCarsPageAndUserClicksRowOnTheAllCarsPage(String row){
-        vehiclesPage.selectAnyRowOfAllCarsTable(row);
+    public void userOnAllCarsPageAndUserClicksRowOnTheAllCarsPage(String row) throws InterruptedException {
+        Thread.sleep(3000);
+        vehiclesPage.selectAnyRowOfAllCarsTable(Integer.parseInt(row));
     }
 
     @Then("user should lands on General Information page")
@@ -32,8 +33,9 @@ public class VehicleGeneralInformationStepDef {
     }
 
     @When("user clicks {string} .row")
-    public void userClicksRow(String row) {
-        vehiclesPage.selectAnyRowOfAllCarsTable(row);
+    public void userClicksRow(String row) throws InterruptedException {
+        Thread.sleep(3000);
+        vehiclesPage.selectAnyRowOfAllCarsTable(Integer.parseInt(row));
     }
 
     @Then("Edit, Delete, and Add Event button should be displayed")
